@@ -13,10 +13,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        // 윈도우 생성
+        let window = UIWindow(windowScene: windowScene)
+        
+        // 두 개의 뷰 컨트롤러 생성
+        let mainViewController = MainViewController()
+        let myPageViewController = MyPageViewController()
+        
+        // "메인" 탭 바 아이콘 설정
+        let mainIcon = UIImage(systemName: "play.rectangle")
+        mainViewController.tabBarItem = UITabBarItem(title: "메인", image: mainIcon, tag: 0)
+        
+        // "마이페이지" 탭 바 아이콘 설정
+        let myPageIcon = UIImage(systemName: "person.crop.rectangle")
+        myPageViewController.tabBarItem = UITabBarItem(title: "마이페이지", image: myPageIcon, tag: 1)
+        
+        // 탭 바 컨트롤러 생성
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [mainViewController, myPageViewController]
+        
+        // 윈도우 루트 뷰 컨트롤러 설정
+        window.rootViewController = tabBarController
+        
+        // 윈도우를 표시
+        self.window = window
+        window.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
