@@ -10,6 +10,37 @@ import UIKit
 class MyPageViewController: UIViewController {
 
     
+    private lazy var moveButton: UIButton = {
+    
+        let button = UIButton()
+    
+        button.backgroundColor = .black
+        button.setTitle("로그인 화면", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(moveView), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+    
+        return button
+    
+    }()
+    
+    private func setupView() {
+        view.addSubview(moveButton)
+    
+        NSLayoutConstraint.activate([
+            moveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            moveButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+    
+    // 리셋버튼이 눌리면 동작하는 함수
+    @objc func moveView() {
+        let vc = LoginViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -43,6 +74,8 @@ class MyPageViewController: UIViewController {
             button.widthAnchor.constraint(equalToConstant: 40),
             button.heightAnchor.constraint(equalTo: button.widthAnchor) // 버튼을 정사각형 모양으로 유지
         ])
+        
+        setupView()
         
     }
     

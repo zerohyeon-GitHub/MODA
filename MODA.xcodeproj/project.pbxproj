@@ -23,6 +23,7 @@
 		6A99C35E2AA6B2520046F042 /* MyPageView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A99C35D2AA6B2520046F042 /* MyPageView2.swift */; };
 		6A99C3602AA6B25B0046F042 /* MyPageView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A99C35F2AA6B25B0046F042 /* MyPageView3.swift */; };
 		EBDFF6882AA7017500875AA3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFF6872AA7017500875AA3 /* LoginViewController.swift */; };
+		EBDFF68B2AA7328000875AA3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFF68A2AA7328000875AA3 /* SignUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		6A99C35D2AA6B2520046F042 /* MyPageView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView2.swift; sourceTree = "<group>"; };
 		6A99C35F2AA6B25B0046F042 /* MyPageView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView3.swift; sourceTree = "<group>"; };
 		EBDFF6872AA7017500875AA3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		EBDFF68A2AA7328000875AA3 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +83,6 @@
 				27776D172AA5CC6100E226D3 /* Controllers */,
 				27776CFA2AA5C0B300E226D3 /* AppDelegate.swift */,
 				27776CFC2AA5C0B300E226D3 /* SceneDelegate.swift */,
-				EBDFF6872AA7017500875AA3 /* LoginViewController.swift */,
 				27776D062AA5C0B500E226D3 /* Assets.xcassets */,
 				27776D082AA5C0B500E226D3 /* LaunchScreen.storyboard */,
 				27776D0B2AA5C0B500E226D3 /* Info.plist */,
@@ -113,10 +114,12 @@
 		27776D172AA5CC6100E226D3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				                27776D132AA5C5D000E226D3 /* MyPageViewController.swift */,
-                6A879C612AA5E31C00E00BBD /* MyPageViewController2.swift */,
+				27776D132AA5C5D000E226D3 /* MyPageViewController.swift */,
+				6A879C612AA5E31C00E00BBD /* MyPageViewController2.swift */,
 				6A879C632AA5F57800E00BBD /* MyPageViewController3.swift */,
-                    27776D112AA5C5AD00E226D3 /* MainViewController.swift */,
+				27776D112AA5C5AD00E226D3 /* MainViewController.swift */,
+				EBDFF6872AA7017500875AA3 /* LoginViewController.swift */,
+				EBDFF68A2AA7328000875AA3 /* SignUpViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				6A879C642AA5F57800E00BBD /* MyPageViewController3.swift in Sources */,
 				27D1898B2AA6AD66003A33FC /* VideoCell.swift in Sources */,
 				27776D192AA5E4C600E226D3 /* MainView.swift in Sources */,
+				EBDFF68B2AA7328000875AA3 /* SignUpViewController.swift in Sources */,
 				27776CFB2AA5C0B300E226D3 /* AppDelegate.swift in Sources */,
 				27776D1B2AA5E9D000E226D3 /* MainModel.swift in Sources */,
 				27776D052AA5C0B300E226D3 /* MODA.xcdatamodeld in Sources */,
