@@ -19,6 +19,16 @@ class MainView: UIView {
         return $0
     }(UIButton(type: .custom))
     
+    let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = 8 // 가로 간격
+        layout.minimumLineSpacing = 8 // 세로 간격
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .white
+        return collectionView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -31,6 +41,10 @@ class MainView: UIView {
         
         mainButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(mainButton)
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(VideoCell.self, forCellWithReuseIdentifier: "VideoCell")
+        addSubview(collectionView)
     }
     
     func setConstraints() {
@@ -39,6 +53,11 @@ class MainView: UIView {
             mainButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0),
             mainButton.widthAnchor.constraint(equalToConstant: 100),
             mainButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView.topAnchor.constraint(equalTo: mainButton.bottomAnchor, constant: 8),
+            collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
     }
     

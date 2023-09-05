@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct Video {
+    let id: Int
+    let thumbnailImageName: String
+    let title: String
+}

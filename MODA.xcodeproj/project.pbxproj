@@ -16,6 +16,7 @@
 		27776D142AA5C5D000E226D3 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27776D132AA5C5D000E226D3 /* MyPageViewController.swift */; };
 		27776D192AA5E4C600E226D3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27776D182AA5E4C600E226D3 /* MainView.swift */; };
 		27776D1B2AA5E9D000E226D3 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27776D1A2AA5E9D000E226D3 /* MainModel.swift */; };
+		27D1898B2AA6AD66003A33FC /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1898A2AA6AD66003A33FC /* VideoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		27776D132AA5C5D000E226D3 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		27776D182AA5E4C600E226D3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		27776D1A2AA5E9D000E226D3 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		27D1898A2AA6AD66003A33FC /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				27776D182AA5E4C600E226D3 /* MainView.swift */,
+				27D1898A2AA6AD66003A33FC /* VideoCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27776D142AA5C5D000E226D3 /* MyPageViewController.swift in Sources */,
+				27D1898B2AA6AD66003A33FC /* VideoCell.swift in Sources */,
 				27776D192AA5E4C600E226D3 /* MainView.swift in Sources */,
 				27776CFB2AA5C0B300E226D3 /* AppDelegate.swift in Sources */,
 				27776D1B2AA5E9D000E226D3 /* MainModel.swift in Sources */,
