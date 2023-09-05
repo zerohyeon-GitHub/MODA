@@ -27,7 +27,7 @@ class MyPageViewController3: UIViewController {
         
         // 최상단에 프로필 타이틀 추가
         let profileTitleLabel = UILabel()
-        profileTitleLabel.text = "Profile"
+        profileTitleLabel.text = "Edit"
         profileTitleLabel.font = UIFont.boldSystemFont(ofSize: 28) // 타이틀 폰트 설정
         profileTitleLabel.textAlignment = .center // 타이틀 가운데 정렬
         profileTitleLabel.translatesAutoresizingMaskIntoConstraints = false

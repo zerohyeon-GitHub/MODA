@@ -16,10 +16,6 @@ class MyPageViewController2: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-//        // NotificationCenter를 등록하여 데이터 업데이트를 수신
-//                NotificationCenter.default.addObserver(self, selector: #selector(updateProfileData(_:)), name: NSNotification.Name(rawValue: "UpdateProfileData"), object: nil)
-
-        
         // 뷰 생성
         let nameLabel = UILabel()
         let idLabel = UILabel()
@@ -116,19 +112,16 @@ class MyPageViewController2: UIViewController {
             
             logoutButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
             logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
-            logoutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
-            logoutButton.heightAnchor.constraint(equalToConstant: 100), // 버튼 높이 조정
+            logoutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80),
+            logoutButton.heightAnchor.constraint(equalToConstant: 100),
             
             editButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
             editButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
-            editButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -230),
+            editButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -220),
             editButton.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
-    //    @objc func likesButtonTapped() {
-    //        print("Likes 버튼이 눌렸습니다.")
-    //    }
-    
+
     // "LOGOUT" 버튼이 눌렸을 때 호출되는 메서드
     @objc func logoutButtonTapped() {
         print("LOGOUT 버튼이 눌렸습니다.")
@@ -141,20 +134,5 @@ class MyPageViewController2: UIViewController {
         // 새로운 뷰 컨트롤러를 모달로 표시
         present(thirdViewController, animated: true, completion: nil)
     }
-//    
-//    // NotificationCenter를 통해 데이터 업데이트를 처리
-//        @objc func updateProfileData(_ notification: Notification) {
-//            if let userInfo = notification.userInfo as? [String: String],
-//               let updatedName = userInfo["name"],
-//               let updatedId = userInfo["id"],
-//               let updatedEmail = userInfo["email"] {
-//                // 텍스트 필드 업데이트
-//                nameTextField.text = updatedName
-//                idTextField.text = updatedId
-//                emailTextField.text = updatedEmail
-//            }
-//        }
-//    deinit {
-//            NotificationCenter.default.removeObserver(self)
-//        }
+
 }

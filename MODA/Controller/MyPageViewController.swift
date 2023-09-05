@@ -26,7 +26,7 @@ class MyPageViewController: UIViewController {
             profileLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10)
         ])
         
-        // 우측 상단 프로필 버튼 
+        // 우측 상단에 버튼 추가
         let button = UIButton(type: .custom)
         let personImage = UIImage(systemName: "person.fill") // 시스템 아이콘 사용
         button.setImage(personImage, for: .normal)
@@ -42,6 +42,7 @@ class MyPageViewController: UIViewController {
             button.widthAnchor.constraint(equalToConstant: 40),
             button.heightAnchor.constraint(equalTo: button.widthAnchor) // 버튼을 정사각형 모양으로 유지
         ])
+        
     }
     
     // 델리게이트에서 네비게이션 안썼을 때
@@ -52,4 +53,5 @@ class MyPageViewController: UIViewController {
         // 새로운 뷰 컨트롤러를 모달로 표시
         present(secondViewController, animated: true, completion: nil)
     }
+    
 }
