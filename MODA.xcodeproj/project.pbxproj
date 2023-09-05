@@ -69,8 +69,8 @@
 			isa = PBXGroup;
 			children = (
 				6A5FDD512AA6B00B00ABA1E9 /* Model */,
-				6A5FDD502AA6B00600ABA1E9 /* View */,
-				6A5FDD4F2AA6AFFC00ABA1E9 /* Controller */,
+				6A5FDD502AA6B00600ABA1E9 /* Views */,
+				6A5FDD4F2AA6AFFC00ABA1E9 /* Controllers */,
 				27776CFA2AA5C0B300E226D3 /* AppDelegate.swift */,
 				27776CFC2AA5C0B300E226D3 /* SceneDelegate.swift */,
 				27776D062AA5C0B500E226D3 /* Assets.xcassets */,
@@ -81,7 +81,7 @@
 			path = MODA;
 			sourceTree = "<group>";
 		};
-		6A5FDD4F2AA6AFFC00ABA1E9 /* Controller */ = {
+		6A5FDD4F2AA6AFFC00ABA1E9 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				27776D112AA5C5AD00E226D3 /* MainViewController.swift */,
@@ -89,17 +89,17 @@
 				6A879C612AA5E31C00E00BBD /* MyPageViewController2.swift */,
 				6A879C632AA5F57800E00BBD /* MyPageViewController3.swift */,
 			);
-			path = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		6A5FDD502AA6B00600ABA1E9 /* View */ = {
+		6A5FDD502AA6B00600ABA1E9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				6A99C35B2AA6B1050046F042 /* MyPageView.swift */,
 				6A99C35D2AA6B2520046F042 /* MyPageView2.swift */,
 				6A99C35F2AA6B25B0046F042 /* MyPageView3.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		6A5FDD512AA6B00B00ABA1E9 /* Model */ = {
