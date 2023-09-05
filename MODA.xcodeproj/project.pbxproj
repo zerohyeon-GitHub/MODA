@@ -64,7 +64,7 @@
 				27776CFC2AA5C0B300E226D3 /* SceneDelegate.swift */,
 				EBDFF6842AA7013E00875AA3 /* Model */,
 				EBDFF6852AA7014700875AA3 /* Views */,
-				EBDFF6862AA7014F00875AA3 /* Controller */,
+				EBDFF6862AA7014F00875AA3 /* Controllers */,
 				27776D062AA5C0B500E226D3 /* Assets.xcassets */,
 				27776D082AA5C0B500E226D3 /* LaunchScreen.storyboard */,
 				27776D0B2AA5C0B500E226D3 /* Info.plist */,
@@ -87,14 +87,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		EBDFF6862AA7014F00875AA3 /* Controller */ = {
+		EBDFF6862AA7014F00875AA3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				27776D112AA5C5AD00E226D3 /* MainViewController.swift */,
 				27776D132AA5C5D000E226D3 /* MyPageViewController.swift */,
 				EBDFF6872AA7017500875AA3 /* LoginViewController.swift */,
 			);
-			path = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
