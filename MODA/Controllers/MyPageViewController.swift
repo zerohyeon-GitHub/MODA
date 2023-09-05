@@ -8,6 +8,7 @@
 import UIKit
 
 class MyPageViewController: UIViewController {
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,4 +55,5 @@ class MyPageViewController: UIViewController {
         present(secondViewController, animated: true, completion: nil)
     }
     
+
 }
