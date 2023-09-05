@@ -15,6 +15,14 @@
 		27776D122AA5C5AD00E226D3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27776D112AA5C5AD00E226D3 /* MainViewController.swift */; };
 		27776D142AA5C5D000E226D3 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27776D132AA5C5D000E226D3 /* MyPageViewController.swift */; };
 		EBDFF6882AA7017500875AA3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFF6872AA7017500875AA3 /* LoginViewController.swift */; };
+		6A879C622AA5E31C00E00BBD /* MyPageViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A879C612AA5E31C00E00BBD /* MyPageViewController2.swift */; };
+		6A879C642AA5F57800E00BBD /* MyPageViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A879C632AA5F57800E00BBD /* MyPageViewController3.swift */; };
+		6A99C35C2AA6B1050046F042 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A99C35B2AA6B1050046F042 /* MyPageView.swift */; };
+		6A99C35E2AA6B2520046F042 /* MyPageView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A99C35D2AA6B2520046F042 /* MyPageView2.swift */; };
+		6A99C3602AA6B25B0046F042 /* MyPageView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A99C35F2AA6B25B0046F042 /* MyPageView3.swift */; };
+		27776D192AA5E4C600E226D3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27776D182AA5E4C600E226D3 /* MainView.swift */; };
+		27776D1B2AA5E9D000E226D3 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27776D1A2AA5E9D000E226D3 /* MainModel.swift */; };
+		27D1898B2AA6AD66003A33FC /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D1898A2AA6AD66003A33FC /* VideoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +36,14 @@
 		27776D112AA5C5AD00E226D3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		27776D132AA5C5D000E226D3 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		EBDFF6872AA7017500875AA3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		6A879C612AA5E31C00E00BBD /* MyPageViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController2.swift; sourceTree = "<group>"; };
+		6A879C632AA5F57800E00BBD /* MyPageViewController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController3.swift; sourceTree = "<group>"; };
+		6A99C35B2AA6B1050046F042 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		6A99C35D2AA6B2520046F042 /* MyPageView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView2.swift; sourceTree = "<group>"; };
+		6A99C35F2AA6B25B0046F042 /* MyPageView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView3.swift; sourceTree = "<group>"; };
+		27776D182AA5E4C600E226D3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		27776D1A2AA5E9D000E226D3 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		27D1898A2AA6AD66003A33FC /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +76,11 @@
 		27776CF92AA5C0B300E226D3 /* MODA */ = {
 			isa = PBXGroup;
 			children = (
+
+				27776D152AA5CC4C00E226D3 /* Model */,
+				27776D162AA5CC5B00E226D3 /* Views */,
+				27776D172AA5CC6100E226D3 /* Controllers */,
+
 				27776CFA2AA5C0B300E226D3 /* AppDelegate.swift */,
 				27776CFC2AA5C0B300E226D3 /* SceneDelegate.swift */,
 				27776D112AA5C5AD00E226D3 /* MainViewController.swift */,
@@ -71,6 +92,42 @@
 				27776D032AA5C0B300E226D3 /* MODA.xcdatamodeld */,
 			);
 			path = MODA;
+			sourceTree = "<group>";
+		};
+
+		27776D152AA5CC4C00E226D3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				27776D1A2AA5E9D000E226D3 /* MainModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		27776D162AA5CC5B00E226D3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+      				6A99C35B2AA6B1050046F042 /* MyPageView.swift */,
+				6A99C35D2AA6B2520046F042 /* MyPageView2.swift */,
+				6A99C35F2AA6B25B0046F042 /* MyPageView3.swift */,
+				27776D182AA5E4C600E226D3 /* MainView.swift */,
+				27D1898A2AA6AD66003A33FC /* VideoCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+
+		27776D172AA5CC6100E226D3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+    
+				27776D132AA5C5D000E226D3 /* MyPageViewController.swift */,
+				6A879C612AA5E31C00E00BBD /* MyPageViewController2.swift */,
+				6A879C632AA5F57800E00BBD /* MyPageViewController3.swift */,
+				27776D112AA5C5AD00E226D3 /* MainViewController.swift */,
+				
+			);
+			path = Controllers;
+
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,7 +202,19 @@
 			files = (
 				EBDFF6882AA7017500875AA3 /* LoginViewController.swift in Sources */,
 				27776D142AA5C5D000E226D3 /* MyPageViewController.swift in Sources */,
+
+				6A99C3602AA6B25B0046F042 /* MyPageView3.swift in Sources */,
+				6A99C35C2AA6B1050046F042 /* MyPageView.swift in Sources */,
+				
+				6A879C622AA5E31C00E00BBD /* MyPageViewController2.swift in Sources */,
+				6A99C35E2AA6B2520046F042 /* MyPageView2.swift in Sources */,
+				6A879C642AA5F57800E00BBD /* MyPageViewController3.swift in Sources */,
+
+				27D1898B2AA6AD66003A33FC /* VideoCell.swift in Sources */,
+				27776D192AA5E4C600E226D3 /* MainView.swift in Sources */,
 				27776CFB2AA5C0B300E226D3 /* AppDelegate.swift in Sources */,
+				27776D1B2AA5E9D000E226D3 /* MainModel.swift in Sources */,
+
 				27776D052AA5C0B300E226D3 /* MODA.xcdatamodeld in Sources */,
 				27776CFD2AA5C0B300E226D3 /* SceneDelegate.swift in Sources */,
 				27776D122AA5C5AD00E226D3 /* MainViewController.swift in Sources */,
