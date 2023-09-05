@@ -19,7 +19,7 @@ class VideoCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.numberOfLines = 2 // 제목이 길 경우 2줄까지 표시
         return label
     }()
@@ -31,20 +31,18 @@ class VideoCell: UICollectionViewCell {
     }
     
     func setUI() {
-        // Add subviews to the cell
         addSubview(thumbnailImageView)
         addSubview(titleLabel)
         
         thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             thumbnailImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             thumbnailImageView.topAnchor.constraint(equalTo: topAnchor),
             thumbnailImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             thumbnailImageView.heightAnchor.constraint(equalTo: thumbnailImageView.widthAnchor, multiplier: 0.75), // 가로:세로 비율을 4:3으로 설정
-        ])
-        
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             titleLabel.topAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor, constant: 4),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -61,5 +59,3 @@ class VideoCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-

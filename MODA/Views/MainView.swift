@@ -10,22 +10,23 @@ import UIKit
 class MainView: UIView {
     
     let mainButton: UIButton = {
-        $0.backgroundColor = .black
-        $0.tintColor = .white
-        $0.layer.cornerRadius = 8
-        $0.clipsToBounds = true
-        $0.setTitle("MODA", for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        return $0
-    }(UIButton(type: .custom))
+        let bt = UIButton(type: .custom)
+        bt.backgroundColor = .black
+        bt.tintColor = .white
+        bt.layer.cornerRadius = 8
+        bt.clipsToBounds = true
+        bt.setTitle("MODA", for: .normal)
+        bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        return bt
+    }()
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumInteritemSpacing = 8 // 가로 간격
-        layout.minimumLineSpacing = 8 // 세로 간격
+        layout.minimumInteritemSpacing = 4 // 가로 간격
+        layout.minimumLineSpacing = 4 // 세로 간격
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemGray5
         return collectionView
     }()
     
@@ -49,15 +50,15 @@ class MainView: UIView {
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            mainButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            mainButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0),
+            mainButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
+            mainButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             mainButton.widthAnchor.constraint(equalToConstant: 100),
             mainButton.heightAnchor.constraint(equalToConstant: 40),
             
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4),
             collectionView.topAnchor.constraint(equalTo: mainButton.bottomAnchor, constant: 8),
-            collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0)
+            collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     

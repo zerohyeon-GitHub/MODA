@@ -37,7 +37,6 @@ class MainViewController: UIViewController {
         
         mainView.collectionView.reloadData()
     }
-
 }
 
 extension MainViewController: UICollectionViewDelegate {
@@ -64,17 +63,9 @@ extension MainViewController: UICollectionViewDataSource {
 
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth = collectionView.bounds.width / 2 - 2 // 2칸으로 나누고 간격을 뺌
+        let itemWidth = collectionView.bounds.width / 2 - 4 // 2칸으로 나누고 간격을 뺌
         let itemHeight = itemWidth * 4/3 // 4:3 비율
-        
+
         return CGSize(width: itemWidth, height: itemHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 4 // 세로 간격 설정
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 4 // 가로 간격 설정
     }
 }
