@@ -9,7 +9,7 @@ import Foundation
 
 struct YoutubeAPIResponse: Codable {
     let items: [Item]
-    let nextPageToken: String? // 추가된 부분
+    let nextPageToken: String?
     
     struct Item: Codable {
         struct Snippet: Codable {
@@ -60,8 +60,8 @@ class YoutubeAPIManager {
             
             do {
                 let decoder = JSONDecoder()
-                let response = try decoder.decode(YoutubeAPIResponse.self, from: data) // 수정된 부분
-                self.nextPageToken = response.nextPageToken // 추가된 부분
+                let response = try decoder.decode(YoutubeAPIResponse.self, from: data)
+                self.nextPageToken = response.nextPageToken
                 completion(response.items.map { Video(id: $0.id, thumbnailImageName: $0.snippet.thumbnails.default.url, title: $0.snippet.title) })
             } catch {
                 print(error)

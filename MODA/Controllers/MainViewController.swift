@@ -52,7 +52,24 @@ class MainViewController: UIViewController {
 
 
 extension MainViewController: UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.height * 1.5 {
+            loadMoreVideos()
+        }
+    }
     
+    func loadMoreVideos() {
+        apiManager.fetchPopularVideos { [weak self] newVideos in
+            DispatchQueue.main.async {
+                self?.videos.append(contentsOf: newVideos)
+                self?.mainView.collectionView.reloadData()
+            }
+        }
+    }
+
 }
 
 extension MainViewController: UICollectionViewDataSource {
