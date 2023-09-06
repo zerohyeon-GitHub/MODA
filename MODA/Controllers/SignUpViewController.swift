@@ -16,6 +16,7 @@ class SignUpViewController: UIViewController {
         label.text = "회원 가입"
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = .black
+        label.textAlignment = .center
         
         return label
     }()
@@ -55,7 +56,7 @@ class SignUpViewController: UIViewController {
     // MARK: ID Label & TextField
     private let idLabel: UILabel = {
         let label = UILabel()
-        label.text = "이름*"
+        label.text = "ID*"
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = .black
         
@@ -87,7 +88,7 @@ class SignUpViewController: UIViewController {
     // MARK: PASSWORD Label & TextField
     private let pwLabel: UILabel = {
         let label = UILabel()
-        label.text = "이름*"
+        label.text = "PASSWORD*"
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = .black
         
@@ -120,7 +121,7 @@ class SignUpViewController: UIViewController {
     // MARK: PASSWORD CHECK Label & TextField
     private let pwCheckLabel: UILabel = {
         let label = UILabel()
-        label.text = "이름*"
+        label.text = "PASSWORD CHECK*"
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = .black
         
@@ -153,7 +154,7 @@ class SignUpViewController: UIViewController {
     // MARK: E-MAIL Label & TextField
     private let emailLabel: UILabel = {
         let label = UILabel()
-        label.text = "이름*"
+        label.text = "E-MAIL*"
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = .black
         
@@ -184,7 +185,7 @@ class SignUpViewController: UIViewController {
     
     private lazy var inputStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [nameStackView, idStackView, pwStackView, pwCheckStackView, emailStackView])
-        stackView.spacing = 10
+        stackView.spacing = 30
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
@@ -216,7 +217,7 @@ class SignUpViewController: UIViewController {
         inputStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
