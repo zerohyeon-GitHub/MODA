@@ -11,6 +11,7 @@ class MainViewController: UIViewController {
     let mainView = MainView()
     var videos: [Video] = []
     let apiManager = YoutubeAPIManager()
+    var isLoadingMoreVideos: Bool = false
     
     override func loadView() {
         view = mainView
@@ -56,7 +57,8 @@ extension MainViewController: UICollectionViewDelegate {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
-        if offsetY > contentHeight - scrollView.frame.height * 1.5 {
+        if !isLoadingMoreVideos && offsetY > contentHeight - scrollView.frame.height * 1.5 {
+            isLoadingMoreVideos = true
             loadMoreVideos()
         }
     }
@@ -66,10 +68,11 @@ extension MainViewController: UICollectionViewDelegate {
             DispatchQueue.main.async {
                 self?.videos.append(contentsOf: newVideos)
                 self?.mainView.collectionView.reloadData()
+                self?.isLoadingMoreVideos = false  // 데이터 로딩이 끝나면 상태를 변경
             }
         }
     }
-
+    
 }
 
 extension MainViewController: UICollectionViewDataSource {
