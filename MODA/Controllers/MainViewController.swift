@@ -8,9 +8,9 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    
     let mainView = MainView()
     var videos: [Video] = []
+    let apiManager = YoutubeAPIManager()
     
     override func loadView() {
         view = mainView
@@ -19,25 +19,19 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 비디오 데이터 추가 (임의의 데이터 예시)
-        let video1 = Video(id: 1, thumbnailImageName: "sticky-notes", title: "Video 1")
-        let video2 = Video(id: 2, thumbnailImageName: "sticky-notes", title: "Video 2")
-        let video3 = Video(id: 3, thumbnailImageName: "sticky-notes", title: "Video 3")
-        let video4 = Video(id: 4, thumbnailImageName: "sticky-notes", title: "Video 4")
-        let video5 = Video(id: 5, thumbnailImageName: "sticky-notes", title: "Video 5")
-        let video6 = Video(id: 6, thumbnailImageName: "sticky-notes", title: "Video 6")
-        let video7 = Video(id: 7, thumbnailImageName: "sticky-notes", title: "Video 7")
-        let video8 = Video(id: 8, thumbnailImageName: "sticky-notes", title: "Video 8")
-        let video9 = Video(id: 9, thumbnailImageName: "sticky-notes", title: "Video 9")
-        
-        videos = [video1, video2, video3, video4, video5, video6, video7, video8, video9]
-        
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
         
-        mainView.collectionView.reloadData()
+        // API 관리자를 사용하여 인기 동영상 가져오기
+        apiManager.fetchPopularVideos { [weak self] videos in
+            DispatchQueue.main.async {
+                self?.videos = videos
+                self?.mainView.collectionView.reloadData()
+            }
+        }
     }
 }
+
 
 extension MainViewController: UICollectionViewDelegate {
     

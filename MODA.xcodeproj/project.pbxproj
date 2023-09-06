@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		274991842AA8546F00F77C5C /* YoutubeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274991832AA8546F00F77C5C /* YoutubeAPIManager.swift */; };
 		27776CFB2AA5C0B300E226D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27776CFA2AA5C0B300E226D3 /* AppDelegate.swift */; };
 		27776CFD2AA5C0B300E226D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27776CFC2AA5C0B300E226D3 /* SceneDelegate.swift */; };
 		27776D052AA5C0B300E226D3 /* MODA.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27776D032AA5C0B300E226D3 /* MODA.xcdatamodeld */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		274991832AA8546F00F77C5C /* YoutubeAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeAPIManager.swift; sourceTree = "<group>"; };
 		27776CF72AA5C0B300E226D3 /* MODA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MODA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27776CFA2AA5C0B300E226D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27776CFC2AA5C0B300E226D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				27776D1A2AA5E9D000E226D3 /* MainModel.swift */,
+				274991832AA8546F00F77C5C /* YoutubeAPIManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -113,10 +116,10 @@
 		27776D172AA5CC6100E226D3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				                27776D132AA5C5D000E226D3 /* MyPageViewController.swift */,
-                6A879C612AA5E31C00E00BBD /* MyPageViewController2.swift */,
+				27776D132AA5C5D000E226D3 /* MyPageViewController.swift */,
+				6A879C612AA5E31C00E00BBD /* MyPageViewController2.swift */,
 				6A879C632AA5F57800E00BBD /* MyPageViewController3.swift */,
-                    27776D112AA5C5AD00E226D3 /* MainViewController.swift */,
+				27776D112AA5C5AD00E226D3 /* MainViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				6A879C642AA5F57800E00BBD /* MyPageViewController3.swift in Sources */,
 				27D1898B2AA6AD66003A33FC /* VideoCell.swift in Sources */,
 				27776D192AA5E4C600E226D3 /* MainView.swift in Sources */,
+				274991842AA8546F00F77C5C /* YoutubeAPIManager.swift in Sources */,
 				27776CFB2AA5C0B300E226D3 /* AppDelegate.swift in Sources */,
 				27776D1B2AA5E9D000E226D3 /* MainModel.swift in Sources */,
 				27776D052AA5C0B300E226D3 /* MODA.xcdatamodeld in Sources */,
