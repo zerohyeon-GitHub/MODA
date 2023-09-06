@@ -6,4 +6,9 @@ target 'MODA' do
   pod 'SwiftyJSON', '~> 5.0.1'
   pod 'Kingfisher', '~> 6.0'
   pod 'SnapKit'
+  pod 'GoogleAPIClientForREST'
+  pod 'GoogleSignIn'
+  pod 'YouTubePlayer'
+  pod 'YoutubePlayer-in-WKWebView'
+
 end

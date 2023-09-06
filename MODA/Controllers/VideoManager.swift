@@ -42,8 +42,8 @@ class VideoDataManager {
                             if let videoId = item["id"]["videoId"].string,
                                let title = item["snippet"]["title"].string,
                                let thumbnailURL = item["snippet"]["thumbnails"]["medium"]["url"].string {
-                                
-                                let video = Video(id: videoId, thumbnailImageName: thumbnailURL, title: title)
+                                let videoURL = "https://www.youtube.com/watch?v=\(videoId)"
+                                let video = Video(id: videoId, thumbnailImageName: thumbnailURL, title: title, videoURL: videoURL)
                                 videos.append(video)
                             }
                         }
