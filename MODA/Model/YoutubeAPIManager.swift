@@ -8,6 +8,9 @@
 import Foundation
 
 struct YoutubeAPIResponse: Codable {
+    let items: [Item]
+    let nextPageToken: String? // 추가된 부분
+    
     struct Item: Codable {
         struct Snippet: Codable {
             struct Thumbnails: Codable {
@@ -25,70 +28,47 @@ struct YoutubeAPIResponse: Codable {
         let id: String
         let snippet: Snippet
     }
-    
-    let items: [Item]
 }
 
 class YoutubeAPIManager {
     let apiKey = "AIzaSyASzD9pPFFt4gxv20U2dXlwWvTVgLLzRek"
+    var nextPageToken: String?
     
     func fetchPopularVideos(completion: @escaping ([Video]) -> Void) {
-        // YouTube API를 위한 URL 생성
-        let baseUrl = "https://www.googleapis.com/youtube/v3/videos"
-        let parameters = [
-            "part": "snippet",
-            "chart": "mostPopular",
-            "maxResults": "10",
-            "regionCode": "KR",
-            "key": apiKey
+        var urlComponents = URLComponents(string: "https://www.googleapis.com/youtube/v3/videos")!
+        
+        var queryItems = [
+            URLQueryItem(name: "part", value: "snippet"),
+            URLQueryItem(name: "chart", value: "mostPopular"),
+            URLQueryItem(name: "maxResults", value: "20"),
+            URLQueryItem(name: "key", value: apiKey),
+            URLQueryItem(name: "regionCode", value: "KR")
         ]
         
-        // URLSession 요청 만들기
-        if let url = createURL(baseURL: baseUrl, parameters: parameters) {
-            let task = URLSession.shared.dataTask(with: url) { data, _, error in
-                if let error = error {
-                    print("데이터 가져오기 오류: \(error.localizedDescription)")
-                    return
-                }
-                
-                if let data = data {
-                    // JSON 응답을 파싱하고 Video 배열을 생성
-                    if let videos = self.parseJSON(data: data) {
-                        completion(videos)
-                    }
-                }
-            }
-            task.resume()
+        if let nextPageToken = self.nextPageToken {
+            queryItems.append(URLQueryItem(name: "pageToken", value: nextPageToken))
         }
-    }
-    
-    private func createURL(baseURL: String, parameters: [String: String]) -> URL? {
-        var components = URLComponents(string: baseURL)
-        components?.queryItems = parameters.map { key, value in
-            return URLQueryItem(name: key, value: value)
-        }
-        return components?.url
-    }
-    
-    private func parseJSON(data: Data) -> [Video]? {
-        do {
-            let decoder = JSONDecoder()
-            let response = try decoder.decode(YoutubeAPIResponse.self, from: data)
-            
-            // API 응답에서 Video 배열을 생성
-            let videos = response.items.map { item in
-                let id = item.id
-                let snippet = item.snippet
-                let thumbnailImageName = snippet.thumbnails.default.url
-                let title = snippet.title
-                return Video(id: id, thumbnailImageName: thumbnailImageName, title: title)
+        
+        urlComponents.queryItems = queryItems
+        
+        let request = URLRequest(url: urlComponents.url!)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                return
             }
             
-            return videos
-        } catch {
-            print("JSON 파싱 오류: \(error.localizedDescription)")
-            return nil
+            do {
+                let decoder = JSONDecoder()
+                let response = try decoder.decode(YoutubeAPIResponse.self, from: data) // 수정된 부분
+                self.nextPageToken = response.nextPageToken // 추가된 부분
+                completion(response.items.map { Video(id: $0.id, thumbnailImageName: $0.snippet.thumbnails.default.url, title: $0.snippet.title) })
+            } catch {
+                print(error)
+            }
         }
+        
+        task.resume()
     }
-
 }
+

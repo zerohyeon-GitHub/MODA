@@ -29,7 +29,25 @@ class MainViewController: UIViewController {
                 self?.mainView.collectionView.reloadData()
             }
         }
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshVideos), for: .valueChanged)
+        mainView.collectionView.refreshControl = refreshControl
     }
+    
+    @objc func refreshVideos() {
+        apiManager.fetchPopularVideos { [weak self] newVideos in
+            DispatchQueue.main.async {
+                if newVideos.count > 0 {
+                    self?.videos = newVideos
+                }
+                print("새로고침 완료, 새로운 영상 개수: \(newVideos.count)")
+                self?.mainView.collectionView.reloadData()
+                self?.mainView.collectionView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+
 }
 
 
