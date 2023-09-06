@@ -39,18 +39,20 @@ class MainViewController: UIViewController {
     @objc func refreshVideos() {
         apiManager.fetchPopularVideos { [weak self] newVideos in
             DispatchQueue.main.async {
-                if newVideos.count > 0 {
-                    self?.videos = newVideos
+                let existingVideoIDs = Set(self?.videos.map { $0.id } ?? [])
+                let uniqueNewVideos = newVideos.filter { !existingVideoIDs.contains($0.id) }
+                
+                if uniqueNewVideos.count > 0 {
+                    self?.videos = uniqueNewVideos
                 }
-                print("새로고침 완료, 새로운 영상 개수: \(newVideos.count)")
+
+                print("새로고침 완료, 새로운 영상 개수: \(uniqueNewVideos.count)")
                 self?.mainView.collectionView.reloadData()
                 self?.mainView.collectionView.refreshControl?.endRefreshing()
             }
         }
     }
-
 }
-
 
 extension MainViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -66,13 +68,19 @@ extension MainViewController: UICollectionViewDelegate {
     func loadMoreVideos() {
         apiManager.fetchPopularVideos { [weak self] newVideos in
             DispatchQueue.main.async {
-                self?.videos.append(contentsOf: newVideos)
+                // 기존 영상 ID 목록 생성
+                let existingVideoIDs = Set(self?.videos.map { $0.id } ?? [])
+                
+                // 중복되지 않는 새 영상만 선택
+                let uniqueNewVideos = newVideos.filter { !existingVideoIDs.contains($0.id) }
+                
+                // 새로운 영상을 기존 영상 목록에 추가
+                self?.videos.append(contentsOf: uniqueNewVideos)
                 self?.mainView.collectionView.reloadData()
-                self?.isLoadingMoreVideos = false  // 데이터 로딩이 끝나면 상태를 변경
+                self?.isLoadingMoreVideos = false
             }
         }
     }
-    
 }
 
 extension MainViewController: UICollectionViewDataSource {
