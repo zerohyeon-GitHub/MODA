@@ -259,20 +259,21 @@ class SignUpViewController: UIViewController {
         fetchContact()
     }
     
-    private lazy var testButton: UIButton = {
+    private lazy var fetchButton: UIButton = {
         
         let button = UIButton()
         
         button.backgroundColor = .black
-        button.setTitle("test", for: .normal)
+        button.setTitle("fetch", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         
-        button.addTarget(self, action: #selector(testData), for: .touchUpInside)
+        button.addTarget(self, action: #selector(fetchData), for: .touchUpInside)
         
         return button
     }()
     
-    @objc func testData() {
+    @objc func fetchData() {
+        print("fetch button")
         fetchContact()
     }
     
@@ -291,6 +292,104 @@ class SignUpViewController: UIViewController {
             }
         } catch {
             print(error.localizedDescription)
+        }
+    }
+    
+    func fetch<T: NSManagedObject>(request: NSFetchRequest<T>) -> [T] {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        do {
+            let fetchResult = try context.fetch(request)
+            return fetchResult
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
+    
+    private lazy var deleteButton: UIButton = {
+        
+        let button = UIButton()
+        
+        button.backgroundColor = .black
+        button.setTitle("delete", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        
+        button.addTarget(self, action: #selector(deleteData), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    @objc func deleteData() {
+        print("delete All Button")
+        deleteAll(request: UserInfo.fetchRequest())
+    }
+    
+    func deleteAll<T: NSManagedObject>(request: NSFetchRequest<T>) -> Bool {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request: NSFetchRequest<NSFetchRequestResult> = T.fetchRequest()
+        let delete = NSBatchDeleteRequest(fetchRequest: request)
+        do {
+            try context.execute(delete)
+            return true
+        } catch {
+            return false
+        }
+    }
+    
+    private lazy var oneDeleteButton: UIButton = {
+        
+        let button = UIButton()
+        
+        button.backgroundColor = .black
+        button.setTitle("One delete", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        
+        button.addTarget(self, action: #selector(oneDeleteData), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    @objc func oneDeleteData() {
+        print("delete One Button")
+        let fetchResult = fetch(request: UserInfo.fetchRequest())
+        
+        print("fetchResult : \(fetchResult)")
+        print("fetchResult.count : \(fetchResult.count)")
+        print("fetchResult.index : \(fetchResult.index())")
+        print("fetchResult.index : \(fetchResult.index(after: 1))")
+        print("fetchResult.index : \(fetchResult.index(after: 2))")
+        
+        let count = count(request: UserInfo.fetchRequest())
+        print("count : \(count)")
+        //        delete(object: )
+    }
+    
+    func delete(object: NSManagedObject) -> Bool {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        context.delete(object)
+        do {
+            try context.save()
+            return true
+        } catch {
+            return false
+        }
+    }
+    
+    func count<T: NSManagedObject>(request: NSFetchRequest<T>) -> Int? {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        do {
+            let count = try context.count(for: request)
+            return count
+        } catch {
+            return nil
         }
     }
     
@@ -317,7 +416,7 @@ class SignUpViewController: UIViewController {
     private func configure() {
         view.backgroundColor = UIColor.white
         
-        [titleLabel, inputStackView, signUpButton, testButton].forEach {
+        [titleLabel, inputStackView, signUpButton, fetchButton, deleteButton, oneDeleteButton].forEach {
             view.addSubview($0)
         }
     }
@@ -327,7 +426,9 @@ class SignUpViewController: UIViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         inputStackView.translatesAutoresizingMaskIntoConstraints = false
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
-        testButton.translatesAutoresizingMaskIntoConstraints = false
+        fetchButton.translatesAutoresizingMaskIntoConstraints = false
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        oneDeleteButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -338,9 +439,17 @@ class SignUpViewController: UIViewController {
             inputStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             inputStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            testButton.topAnchor.constraint(equalTo: inputStackView.bottomAnchor, constant: 20),
-            testButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            testButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            fetchButton.topAnchor.constraint(equalTo: inputStackView.bottomAnchor, constant: 20),
+            fetchButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            fetchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            deleteButton.topAnchor.constraint(equalTo: fetchButton.bottomAnchor, constant: 10),
+            deleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            deleteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            oneDeleteButton.topAnchor.constraint(equalTo: deleteButton.bottomAnchor, constant: 10),
+            oneDeleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            oneDeleteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
             signUpButton.heightAnchor.constraint(equalToConstant: 30),
             signUpButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
