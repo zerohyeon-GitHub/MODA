@@ -41,6 +41,28 @@ import UIKit
 class LoginViewController: UIViewController {
     
     // MARK: - Properties
+    
+    // App LOGO
+    private let logoImageView: UIImageView = {
+        let imageView = UIImageView()
+        
+        imageView.contentMode = .scaleAspectFill
+//        imageView.layer.cornerRadius = 150
+        imageView.layer.masksToBounds = true
+//        imageView.layer.borderColor = UIColor.lightGray.cgColor
+//        imageView.layer.borderWidth = 0.5
+        
+//        imageView.contentMode = .scaleAspectFill
+//        imageView.layer.cornerRadius = 60
+//        imageView.clipsToBounds = true
+//        imageView.layer.borderWidth = 1
+//        imageView.layer.borderColor = UIColor.black.cgColor
+        
+        imageView.image = UIImage(named: "appLogo")
+        
+        return imageView
+    }()
+    
     // MARK: - ID 입력창
     private lazy var idTextFieldView: UIView = {
         let view = UIView()
@@ -77,7 +99,7 @@ class LoginViewController: UIViewController {
         textField.spellCheckingType = .no // 맞춤법 검사 활성화 여부
         textField.keyboardType = .emailAddress // 키보드 타입
         
-        textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+        textField.addTarget(LoginViewController.self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         
         return textField
     }()
@@ -121,7 +143,7 @@ class LoginViewController: UIViewController {
         textField.clearButtonMode = .always // 입력 내용 한번에 지우는 X버튼
         textField.clearsOnBeginEditing = false // 편집 시 기존 텍스트필드값 제거
         
-        textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+        textField.addTarget(LoginViewController.self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         
         return textField
     }()
@@ -192,6 +214,9 @@ class LoginViewController: UIViewController {
     @objc func signUpButtonTapped() {
         // 회원가입 창 이동
         print("회원가입 이동")
+        let vc = SignUpViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
 //        //만들기
 //        let alert = UIAlertController(title: "비밀번호 재설정", message: "비밀번호를 재설정?", preferredStyle: .alert)
 //        let success = UIAlertAction(title: "확인", style: .default) { action in
@@ -241,12 +266,16 @@ class LoginViewController: UIViewController {
         idTextField.delegate = self
         pwTextField.delegate = self
         
-        [stackViewTextField, stackViewButton].forEach {
+        [logoImageView, stackViewTextField, stackViewButton].forEach {
             view.addSubview($0)
         }
     }
     
     private func setupAutoLayout() {
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive = true
+        logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
         idLabelCenterYConstraint.isActive = true
         
         idLabel.translatesAutoresizingMaskIntoConstraints =   false
