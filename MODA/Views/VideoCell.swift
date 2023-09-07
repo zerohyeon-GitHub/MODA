@@ -12,7 +12,6 @@ class VideoCell: UICollectionViewCell {
     let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .black
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -51,7 +50,21 @@ class VideoCell: UICollectionViewCell {
     }
     
     func configure(with video: Video) {
-        thumbnailImageView.image = UIImage(named: video.thumbnailImageName)
+        if let thumbnailURL = URL(string: video.thumbnailImageName) {
+            URLSession.shared.dataTask(with: thumbnailURL) { data, _, error in
+                if let error = error {
+                    print("이미지 다운로드 오류: \(error.localizedDescription)")
+                    return
+                }
+                
+                if let data = data, let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self.thumbnailImageView.image = image
+                    }
+                }
+            }.resume()
+        }
+        
         titleLabel.text = video.title
     }
     

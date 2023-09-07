@@ -31,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         myPageViewController.tabBarItem = UITabBarItem(title: "마이페이지", image: myPageIcon, tag: 1)
         
         // 탭 바 컨트롤러 생성
-        let tabBarController = UITabBarController()
+        let tabBarController = CustomTabBarController()
         tabBarController.viewControllers = [mainViewController, myPageViewController]
         
         // 윈도우 루트 뷰 컨트롤러 설정
