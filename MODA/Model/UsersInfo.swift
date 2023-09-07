@@ -12,4 +12,5 @@ struct UsersInfo {
     var id: String
     var pw: String
     var email: String
+//    var video: [Video]
 }

@@ -99,7 +99,7 @@ class LoginViewController: UIViewController {
         textField.spellCheckingType = .no // 맞춤법 검사 활성화 여부
         textField.keyboardType = .emailAddress // 키보드 타입
         
-        textField.addTarget(LoginViewController.self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+        textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         
         return textField
     }()
@@ -143,12 +143,13 @@ class LoginViewController: UIViewController {
         textField.clearButtonMode = .always // 입력 내용 한번에 지우는 X버튼
         textField.clearsOnBeginEditing = false // 편집 시 기존 텍스트필드값 제거
         
-        textField.addTarget(LoginViewController.self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+        textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         
         return textField
     }()
     
     @objc private func textFieldEditingChanged(_ textField: UITextField) {
+        print("textFieldEditingChanged 입력")
         // text가 입력이 되었는지 확인
         if textField.text?.count == 1 {
             if textField.text?.first == " " {

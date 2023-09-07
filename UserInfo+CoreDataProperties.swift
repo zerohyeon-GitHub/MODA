@@ -16,10 +16,10 @@ extension UserInfo {
         return NSFetchRequest<UserInfo>(entityName: "UserInfo")
     }
 
-    @NSManaged public var email: String?
     @NSManaged public var id: String?
     @NSManaged public var name: String?
     @NSManaged public var pw: String?
+    @NSManaged public var email: String?
 
 }
 

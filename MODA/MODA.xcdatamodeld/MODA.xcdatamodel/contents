@@ -5,6 +5,5 @@
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="pw" optional="YES" attributeType="String"/>
-        <fetchIndex name="UserInfoIndex"/>
     </entity>
 </model>

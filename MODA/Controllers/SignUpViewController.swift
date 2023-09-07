@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 
 class SignUpViewController: UIViewController {
-    
     // MARK: - Properties
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -230,72 +229,60 @@ class SignUpViewController: UIViewController {
         } else if pwCheckTextField.text == "" {
             alertMessage(message: "pw check")
         } else {
-            // 데이터 저장.
-            // NSManagedObjectContext를 가져온다.
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let context = appDelegate.persistentContainer.viewContext
-            // Entity를 가져온다.
-            let entity = NSEntityDescription.entity(forEntityName: "UserInfo", in: context)
-            // NSManagedObjet를 만든다.
-            // NSManagedObject에 값을 세팅해준다.
             let data = UsersInfo(name: nameTextField.text ?? "", id: idTextField.text ?? "", pw: pwTextField.text ?? "", email: emailTextField.text ?? "")
-            
-            if let entity = entity {
-                let usersInfo = NSManagedObject(entity: entity, insertInto: context)
-                usersInfo.setValue(data.name, forKey: "name")
-                usersInfo.setValue(data.id, forKey: "id")
-                usersInfo.setValue(data.pw, forKey: "pw")
-                usersInfo.setValue(data.email, forKey: "email")
-                
-                // NSManagedObjectContext 저장.
-                do {
-                    try context.save()
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-            
+            insertCoreData(userInfo: data)
         }
-        fetchContact()
     }
     
-    private lazy var fetchButton: UIButton = {
-        
-        let button = UIButton()
-        
-        button.backgroundColor = .black
-        button.setTitle("fetch", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        
-        button.addTarget(self, action: #selector(fetchData), for: .touchUpInside)
-        
-        return button
-    }()
-    
-    @objc func fetchData() {
-        print("fetch button")
-        fetchContact()
-    }
-    
-    func fetchContact() {
+    // MARK: Core Data 함수
+    // Core Data Insert
+    func insertCoreData(userInfo: UsersInfo) -> Bool {
+        print("insert Core Data")
+        print("userinfo : \(userInfo)")
+        // NSManagedObjectContext를 가져온다.
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
+        // Entity를 가져온다.
+        let entity = NSEntityDescription.entity(forEntityName: "UserInfo", in: context)
         
-        do {
-            let contact = try context.fetch(UserInfo.fetchRequest()) as! [UserInfo]
-            contact.forEach {
-                print("$0 : \($0)")
-                print("$0.name : \($0.name)")
-                print("$0.id : \($0.id)")
-                print("$0.pw : \($0.pw)")
-                print("$0.email : \($0.email)")
+        if let entity = entity {
+            let managedObject = NSManagedObject(entity: entity, insertInto: context)
+            
+            managedObject.setValue(userInfo.name, forKey: "name")
+            managedObject.setValue(userInfo.id, forKey: "id")
+            managedObject.setValue(userInfo.pw, forKey: "pw")
+            managedObject.setValue(userInfo.email, forKey: "email")
+            
+            do {
+                try context.save()
+                return true
+            } catch {
+                print(error.localizedDescription)
+                return false
             }
-        } catch {
-            print(error.localizedDescription)
+        } else {
+            return false
         }
     }
     
-    func fetch<T: NSManagedObject>(request: NSFetchRequest<T>) -> [T] {
+    // Core Data Count
+    func countCoreData<T: NSManagedObject>(request: NSFetchRequest<T>) -> Int? {
+        print("count Core Data")
+        // NSManagedObjectContext를 가져온다.
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        do {
+            let count = try context.count(for: request)
+            return count
+        } catch {
+            return nil
+        }
+    }
+    
+    // Core Data Fetch
+    func fetchCoreData<T: NSManagedObject>(request: NSFetchRequest<T>) -> [T] {
+        print("fetch Core Data")
+        // NSManagedObjectContext를 가져온다.
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
@@ -308,25 +295,28 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    private lazy var deleteButton: UIButton = {
+    // ID가 동일한 Core Data Fetch
+    func fetchIdCoreData<T: NSManagedObject>(request: NSFetchRequest<T>, id: String) -> [T] {
+        print("fetch Core Data")
+        // NSManagedObjectContext를 가져온다.
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
         
-        let button = UIButton()
+        request.predicate = NSPredicate(format: "id = %@", id)
         
-        button.backgroundColor = .black
-        button.setTitle("delete", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        
-        button.addTarget(self, action: #selector(deleteData), for: .touchUpInside)
-        
-        return button
-    }()
-    
-    @objc func deleteData() {
-        print("delete All Button")
-        deleteAll(request: UserInfo.fetchRequest())
+        do {
+            let fetchResult = try context.fetch(request)
+            return fetchResult
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
     }
     
-    func deleteAll<T: NSManagedObject>(request: NSFetchRequest<T>) -> Bool {
+    // All Core Data Delete
+    func deleteAllCoreData<T: NSManagedObject>(request: NSFetchRequest<T>) -> Bool {
+        print("delete All Core Data")
+        // NSManagedObjectContext를 가져온다.
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
@@ -340,35 +330,10 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    private lazy var oneDeleteButton: UIButton = {
-        
-        let button = UIButton()
-        
-        button.backgroundColor = .black
-        button.setTitle("One delete", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        
-        button.addTarget(self, action: #selector(oneDeleteData), for: .touchUpInside)
-        
-        return button
-    }()
-    
-    @objc func oneDeleteData() {
-        print("delete One Button")
-        let fetchResult = fetch(request: UserInfo.fetchRequest())
-        
-        print("fetchResult : \(fetchResult)")
-        print("fetchResult.count : \(fetchResult.count)")
-        print("fetchResult.index : \(fetchResult.index())")
-        print("fetchResult.index : \(fetchResult.index(after: 1))")
-        print("fetchResult.index : \(fetchResult.index(after: 2))")
-        
-        let count = count(request: UserInfo.fetchRequest())
-        print("count : \(count)")
-        //        delete(object: )
-    }
-    
-    func delete(object: NSManagedObject) -> Bool {
+    // Selected Core Data Delete
+    func deleteSelectedCoreData(object: NSManagedObject) -> Bool {
+        print("delete selected Core Data")
+        // NSManagedObjectContext를 가져온다.
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
@@ -381,16 +346,117 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    func count<T: NSManagedObject>(request: NSFetchRequest<T>) -> Int? {
+    // My List Core Data Delete - 임의로 생성해 놓은 함수
+    // 해당되는 id 삭제
+    // 삭제를 하고 새로이 저장을 해야 해당되는 내용이 저장됨.
+    func deleteMyListCoreData<T: NSManagedObject>(request: NSFetchRequest<T>, id: String) -> Bool {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
+        request.predicate = NSPredicate(format: "id = %@", id)
+        
         do {
-            let count = try context.count(for: request)
-            return count
+            let fetchResult = try context.fetch(request)
+            if fetchResult.count == 0 {
+                print("deleteMyListCoreData : false")
+                return false
+            } else {
+                context.delete(fetchResult[0])
+                try context.save()
+                print("deleteMyListCoreData : true")
+                return true
+            }
         } catch {
-            return nil
+            print(error.localizedDescription)
+            return false
         }
+    }
+    
+    // 사용자 정보 수정
+    func editUserInfoCoreData<T: NSManagedObject>(request: NSFetchRequest<T>, id: String, name: String) -> Bool {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        request.predicate = NSPredicate(format: "id = %@", id)
+        print("request : \(request)")
+        do {
+            let fetchResult = try context.fetch(request)
+            print("fetchResult : \(fetchResult)")
+            if fetchResult.count == 0 {
+                print("editUserInfoCoreData : false")
+                return false
+            } else {
+                // 수정.
+                for result in fetchResult {
+                    result.setValue(name, forKey: "name")
+                }
+                try context.save()
+                print("editUserInfoCoreData : true")
+                return true
+            }
+        } catch {
+            print(error.localizedDescription)
+            return false
+        }
+    }
+    
+    private lazy var fetchButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .black
+        button.setTitle("Fetch) Core data 전체 확인", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        
+        button.addTarget(self, action: #selector(fetchData), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    @objc func fetchData() {
+        print("fetch button")
+        let coreData = UserInfo.fetchRequest()
+        let fetch = fetchCoreData(request: coreData)
+        // 데이터 하나씩 출력
+        for result in fetch {
+            let data = UsersInfo(name: result.name ?? "", id: result.id ?? "", pw: result.pw ?? "", email: result.email ?? "")
+            print("data: \(data)")
+        }
+    }
+    
+    private lazy var deleteButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .black
+        button.setTitle("데이터 수정 가능한지 확인", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        
+        button.addTarget(self, action: #selector(deleteData), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    @objc func deleteData() {
+        print("delete All Button")
+        let coreData = UserInfo.fetchRequest()
+//        deleteAllCoreData(request: coreData)
+        editUserInfoCoreData(request: coreData, id: idTextField.text ?? "", name: nameTextField.text ?? "")
+    }
+    
+    private lazy var oneDeleteButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .black
+        button.setTitle("id에 있는 text를 읽어와서 core data에서 삭제", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(oneDeleteData), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func oneDeleteData() {
+        print("One delete Button")
+        let coreData = UserInfo.fetchRequest()
+        let fetchResult = fetchCoreData(request: UserInfo.fetchRequest())
+        
+        let count = countCoreData(request: UserInfo.fetchRequest())
+        print("Core 데이터 Count : \(count)")
+        deleteMyListCoreData(request: coreData, id: idTextField.text ?? "")
     }
     
     func alertMessage(message: String) {
