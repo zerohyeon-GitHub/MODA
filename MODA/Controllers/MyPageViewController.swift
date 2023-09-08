@@ -15,16 +15,16 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LikeCell", for: indexPath) as! LikelistCell
-
+        
         let video = videos[indexPath.row]
-
+        
         if let thumbnailURL = URL(string: video.thumbnailImageName) {
             URLSession.shared.dataTask(with: thumbnailURL) { data, _, error in
                 if let error = error {
                     print("이미지 다운로드 오류: \(error.localizedDescription)")
                     return
                 }
-
+                
                 if let data = data, let image = UIImage(data: data) {
                     DispatchQueue.main.async {
                         cell.thumbnailImageView.image = image // 'cell'의 'thumbnailImageView'에 이미지 설정
@@ -32,15 +32,15 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
                 }
             }.resume()
         }
-
+        
         // 제목 설정
         cell.titleLabel.text = video.title
         cell.titleLabel.numberOfLines = 4 // 두 줄까지 표시되도록 설정
         cell.titleLabel.lineBreakMode = .byWordWrapping // 줄 바꿈 설정
-
+        
         // ID 설정
         cell.idLabel.text = "ID: \(video.id)"
-
+        
         return cell
     }
     
@@ -51,14 +51,13 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
     // 테이블 뷰
     let tableView = UITableView()
     
-
+    
     // 예제 데이터
     var videos: [Video] = [
     ]
     let apiManager = YoutubeAPIManager()
-
-    let videos: [Video] = []
-
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,10 +124,10 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
         
         // 데이터를 가져올 때 사용할 NSFetchRequest
         let fetchRequest = NSFetchRequest<UserInfo>(entityName: "UserInfo")
-
+        
         // 가져온 데이터를 저장할 변수를 선언
         var firstItem: UserInfo?
-
+        
         // fetchFirstIdCoreData를 호출, 첫번째 데이터를 가져옴
         if let fetchedItem = CoreDataManager.shared.fetchFirstIdCoreData(request: fetchRequest) {
             firstItem = fetchedItem
@@ -136,40 +135,37 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
             // 데이터를 가져오지 못한 경우
         }
         
-
+        
         // firstItem을 사용하여 데이터를 조작하거나 표시
         if let item = firstItem {
             // MyPageViewController2에 데이터 전달
             let secondViewController = MyPageViewController2()
-                        secondViewController.userInfo = item // 데이터를 전달
+            secondViewController.userInfo = item // 데이터를 전달
             
             // 새로운 뷰 컨트롤러를 모달로 표시
             present(secondViewController, animated: true, completion: nil)
         }
-
-        // 새로운 뷰 컨트롤러를 모달로 표시
-        present(secondViewController, animated: true, completion: nil)
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        videos.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! LikelistCell
         
-        let video = videos[indexPath.row]
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            videos.count
+        }
         
-        // 썸네일 이미지 설정
-        cell.thumbnailImageView.image = UIImage(named: "youtube")
-        
-        // 제목 설정
-        cell.titleLabel.text = video.title
-        
-        // ID 설정
-        cell.idLabel.text = "ID: \(String(video.id))"
-        
-        return cell
-
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! LikelistCell
+            
+            let video = videos[indexPath.row]
+            
+            // 썸네일 이미지 설정
+            cell.thumbnailImageView.image = UIImage(named: "youtube")
+            
+            // 제목 설정
+            cell.titleLabel.text = video.title
+            
+            // ID 설정
+            cell.idLabel.text = "ID: \(String(video.id))"
+            
+            return cell
+            
+        }
     }
 }
