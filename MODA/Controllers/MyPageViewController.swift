@@ -7,43 +7,44 @@
 
 import UIKit
 
-class MyPageViewController: UIViewController {
-
+class MyPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    private lazy var moveButton: UIButton = {
+    // 테이블 뷰
+    let tableView = UITableView()
     
-        let button = UIButton()
-    
-        button.backgroundColor = .black
-        button.setTitle("로그인 화면", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.addTarget(self, action: #selector(moveView), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-    
-        return button
-    
-    }()
-    
-    private func setupView() {
-        view.addSubview(moveButton)
-    
-        NSLayoutConstraint.activate([
-            moveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            moveButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-    }
-    
-    // 리셋버튼이 눌리면 동작하는 함수
-    @objc func moveView() {
-        let vc = LoginViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
-    }
-    
+    // 예제 데이터
+    let videos: [Video] = [
+        Video(id: 1, thumbnailImageName: "video100", title: "Video 111"),
+        Video(id: 2, thumbnailImageName: "video200", title: "Video 222"),
+        Video(id: 3, thumbnailImageName: "video300", title: "Video 333"),
+        Video(id: 4, thumbnailImageName: "video400", title: "Video 444"),
+        Video(id: 5, thumbnailImageName: "video500", title: "Video 555"),
+        Video(id: 6, thumbnailImageName: "video600", title: "Video 666"),
+        Video(id: 7, thumbnailImageName: "video700", title: "Video 777"),
+        Video(id: 8, thumbnailImageName: "video800", title: "Video 888"),
+        Video(id: 9, thumbnailImageName: "video900", title: "Video 999"),
+        
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        
+        // Register the custom cell class (커스텀 셀 클래스를 등록)
+        tableView.register(LikelistCell.self, forCellReuseIdentifier: "VideoCell")
+        
+        // 테이블 뷰 설정
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 60), // Profile 레이블 아래에 위치
+            tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
         
         // 최상단에 Profile 라벨 추가
         let profileLabel = UILabel()
@@ -74,13 +75,12 @@ class MyPageViewController: UIViewController {
             button.widthAnchor.constraint(equalToConstant: 40),
             button.heightAnchor.constraint(equalTo: button.widthAnchor) // 버튼을 정사각형 모양으로 유지
         ])
-        
-        setupView()
-        
     }
     
-    // 델리게이트에서 네비게이션 안썼을 때
     @objc func buttonTapped() {
+        
+        print("프로필 버튼이 눌렸습니다")
+        
         // 새로운 뷰 컨트롤러 생성
         let secondViewController = MyPageViewController2()
         
@@ -88,5 +88,29 @@ class MyPageViewController: UIViewController {
         present(secondViewController, animated: true, completion: nil)
     }
     
-
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        videos.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! LikelistCell
+            
+            let video = videos[indexPath.row]
+            
+            // 썸네일 이미지 설정
+            cell.thumbnailImageView.image = UIImage(named: "youtube")
+            
+            // 제목 설정
+            cell.titleLabel.text = video.title
+            
+            // ID 설정
+            cell.idLabel.text = "ID: \(video.id)"
+            
+            return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120 // 원하는 높이로 변경
+    }
+    
 }

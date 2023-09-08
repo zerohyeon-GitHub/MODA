@@ -8,7 +8,7 @@
 import Foundation
 
 struct Video {
-    let id: Int
+    let id: String
     let thumbnailImageName: String
     let title: String
 }

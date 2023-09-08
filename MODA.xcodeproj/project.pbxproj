@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		274991842AA8546F00F77C5C /* YoutubeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274991832AA8546F00F77C5C /* YoutubeAPIManager.swift */; };
+		274991882AA8C50500F77C5C /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274991872AA8C50500F77C5C /* CustomTabBarController.swift */; };
 		27776CFB2AA5C0B300E226D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27776CFA2AA5C0B300E226D3 /* AppDelegate.swift */; };
 		27776CFD2AA5C0B300E226D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27776CFC2AA5C0B300E226D3 /* SceneDelegate.swift */; };
 		27776D052AA5C0B300E226D3 /* MODA.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27776D032AA5C0B300E226D3 /* MODA.xcdatamodeld */; };
@@ -23,6 +25,7 @@
 		6A99C35E2AA6B2520046F042 /* MyPageView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A99C35D2AA6B2520046F042 /* MyPageView2.swift */; };
 		6A99C3602AA6B25B0046F042 /* MyPageView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A99C35F2AA6B25B0046F042 /* MyPageView3.swift */; };
 		EBC4695A2AAAA1E800CC2334 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC469592AAAA1E800CC2334 /* CoreDataManager.swift */; };
+		6A9EDB4B2AA99FED006D284A /* LikelistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9EDB4A2AA99FED006D284A /* LikelistCell.swift */; };
 		EBDFF6882AA7017500875AA3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFF6872AA7017500875AA3 /* LoginViewController.swift */; };
 		EBDFF68B2AA7328000875AA3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFF68A2AA7328000875AA3 /* SignUpViewController.swift */; };
 		EBDFF68D2AA8040100875AA3 /* UsersInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFF68C2AA8040100875AA3 /* UsersInfo.swift */; };
@@ -31,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		274991832AA8546F00F77C5C /* YoutubeAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeAPIManager.swift; sourceTree = "<group>"; };
+		274991872AA8C50500F77C5C /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		27776CF72AA5C0B300E226D3 /* MODA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MODA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27776CFA2AA5C0B300E226D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27776CFC2AA5C0B300E226D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +54,7 @@
 		6A99C35D2AA6B2520046F042 /* MyPageView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView2.swift; sourceTree = "<group>"; };
 		6A99C35F2AA6B25B0046F042 /* MyPageView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView3.swift; sourceTree = "<group>"; };
 		EBC469592AAAA1E800CC2334 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		6A9EDB4A2AA99FED006D284A /* LikelistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikelistCell.swift; sourceTree = "<group>"; };
 		EBDFF6872AA7017500875AA3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EBDFF68A2AA7328000875AA3 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		EBDFF68C2AA8040100875AA3 /* UsersInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersInfo.swift; sourceTree = "<group>"; };
@@ -105,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				27776D1A2AA5E9D000E226D3 /* MainModel.swift */,
+				274991832AA8546F00F77C5C /* YoutubeAPIManager.swift */,
 				EBDFF68C2AA8040100875AA3 /* UsersInfo.swift */,
 				EBC469592AAAA1E800CC2334 /* CoreDataManager.swift */,
 			);
@@ -119,6 +126,7 @@
 				6A99C35F2AA6B25B0046F042 /* MyPageView3.swift */,
 				27776D182AA5E4C600E226D3 /* MainView.swift */,
 				27D1898A2AA6AD66003A33FC /* VideoCell.swift */,
+				6A9EDB4A2AA99FED006D284A /* LikelistCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -130,6 +138,7 @@
 				6A879C612AA5E31C00E00BBD /* MyPageViewController2.swift */,
 				6A879C632AA5F57800E00BBD /* MyPageViewController3.swift */,
 				27776D112AA5C5AD00E226D3 /* MainViewController.swift */,
+				274991872AA8C50500F77C5C /* CustomTabBarController.swift */,
 				EBDFF6872AA7017500875AA3 /* LoginViewController.swift */,
 				EBDFF68A2AA7328000875AA3 /* SignUpViewController.swift */,
 			);
@@ -210,15 +219,18 @@
 				27776D142AA5C5D000E226D3 /* MyPageViewController.swift in Sources */,
 				EBDFF6972AA8697100875AA3 /* UserInfo+CoreDataClass.swift in Sources */,
 				EBC4695A2AAAA1E800CC2334 /* CoreDataManager.swift in Sources */,
+				274991882AA8C50500F77C5C /* CustomTabBarController.swift in Sources */,
 				6A99C3602AA6B25B0046F042 /* MyPageView3.swift in Sources */,
 				6A99C35C2AA6B1050046F042 /* MyPageView.swift in Sources */,
 				EBDFF68D2AA8040100875AA3 /* UsersInfo.swift in Sources */,
 				6A879C622AA5E31C00E00BBD /* MyPageViewController2.swift in Sources */,
+				6A9EDB4B2AA99FED006D284A /* LikelistCell.swift in Sources */,
 				6A99C35E2AA6B2520046F042 /* MyPageView2.swift in Sources */,
 				6A879C642AA5F57800E00BBD /* MyPageViewController3.swift in Sources */,
 				27D1898B2AA6AD66003A33FC /* VideoCell.swift in Sources */,
 				27776D192AA5E4C600E226D3 /* MainView.swift in Sources */,
 				EBDFF6952AA8691200875AA3 /* UserInfo+CoreDataProperties.swift in Sources */,
+				274991842AA8546F00F77C5C /* YoutubeAPIManager.swift in Sources */,
 				EBDFF68B2AA7328000875AA3 /* SignUpViewController.swift in Sources */,
 				27776CFB2AA5C0B300E226D3 /* AppDelegate.swift in Sources */,
 				27776D1B2AA5E9D000E226D3 /* MainModel.swift in Sources */,

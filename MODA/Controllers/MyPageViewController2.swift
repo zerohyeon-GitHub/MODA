@@ -10,8 +10,6 @@ import UIKit
 class MyPageViewController2: UIViewController {
     
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -125,7 +123,26 @@ class MyPageViewController2: UIViewController {
     // "LOGOUT" 버튼이 눌렸을 때 호출되는 메서드
     @objc func logoutButtonTapped() {
         print("LOGOUT 버튼이 눌렸습니다.")
+        
+        // 화면1: LoginViewController
+        // 화면2: MyPageViewController
+        // 화면3: MyPageViewController2
+        // 화면2, 화면3 메모리 해제
+        if let MyPageViewController = presentingViewController as? MyPageViewController {
+                // 화면2를 닫음
+            MyPageViewController.dismiss(animated: true) {
+                // 그 후에 화면3도 닫음
+                    self.dismiss(animated: true, completion: nil)
+                }
+            } else {
+                // 화면2가 아닌 경우
+                // 새로운 화면1을 띄움
+                let LoginViewController = LoginViewController()
+                LoginViewController.modalPresentationStyle = .fullScreen
+                present(LoginViewController, animated: true, completion: nil)
+            }
     }
+    
     @objc func editButtonTapped() {
         print("EDIT 버튼이 눌렸습니다.")
         // 새로운 뷰 컨트롤러 생성
