@@ -6,22 +6,36 @@
 //
 
 import UIKit
+import CoreData
 
 class MyPageViewController2: UIViewController {
     
+    // MyPageViewController의 buttonTapped에서 가져온 데이터를 저장할 변수
+    var userInfo: UserInfo?
+    
+    // userInfo를 업데이트하기 위한 클로저 프로퍼티 정의
+    var updateUserInfoClosure: ((UserInfo?) -> Void)?
+    // 뷰 생성
+    let nameLabel = UILabel()
+    let idLabel = UILabel()
+    let emailLabel = UILabel()
+    
+    let nameTextField = UITextField()
+    let idTextField = UITextField()
+    let emailTextField = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        // 뷰 생성
-        let nameLabel = UILabel()
-        let idLabel = UILabel()
-        let emailLabel = UILabel()
         
-        let nameTextField = UITextField()
-        let idTextField = UITextField()
-        let emailTextField = UITextField()
+        
+        // MyPageViewController의 buttonTapped에서 가져온 데이터를 텍스트 필드에 표시
+        if let userInfo = userInfo {
+            nameTextField.text = userInfo.name
+            idTextField.text = userInfo.id
+            emailTextField.text = userInfo.email
+        }
         
         // 최상단에 프로필 타이틀 추가
         let profileTitleLabel = UILabel()
@@ -119,21 +133,31 @@ class MyPageViewController2: UIViewController {
             editButton.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
-
+    
     // "LOGOUT" 버튼이 눌렸을 때 호출되는 메서드
     @objc func logoutButtonTapped() {
         print("LOGOUT 버튼이 눌렸습니다.")
         
-        // 화면1: LoginViewController
-        // 화면2: MyPageViewController
-        // 화면3: MyPageViewController2
-        // 화면2, 화면3 메모리 해제
-        if let MyPageViewController = presentingViewController as? MyPageViewController {
-                // 화면2를 닫음
-            MyPageViewController.dismiss(animated: true) {
-                // 그 후에 화면3도 닫음
-                    self.dismiss(animated: true, completion: nil)
+        // 현재의 화면이 MyPageViewController에 속한 경우
+        if let myPageViewController = presentingViewController as? MyPageViewController {
+            // MyPageViewController를 닫음
+            myPageViewController.dismiss(animated: true) {
+                // MyPageViewController가 닫힌 후에 다음 단계 진행
+                // TabBarController를 닫음
+                if let tabBarController = myPageViewController.tabBarController {
+                    tabBarController.dismiss(animated: true) {
+                        // TabBarController가 닫힌 후에 다음 단계 진행
+                        // 현재 띄워진 MyPageViewController2를 닫음
+                        self.dismiss(animated: true) {
+                            // MyPageViewController2가 닫힌 후에 다음 단계 진행
+                            // LoginViewController를 표시
+                            let loginViewController = LoginViewController()
+                            loginViewController.modalPresentationStyle = .fullScreen
+                            self.present(loginViewController, animated: true, completion: nil)
+                        }
+                    }
                 }
+
             } else {
                 logout()
                 // 화면2가 아닌 경우
@@ -141,22 +165,62 @@ class MyPageViewController2: UIViewController {
                 let LoginViewController = LoginViewController()
                 LoginViewController.modalPresentationStyle = .fullScreen
                 present(LoginViewController, animated: true, completion: nil)
+
             }
+        } else {
+            // 현재의 화면이 MyPageViewController에 속하지 않는 경우
+            // LoginViewController를 직접 표시
+            let loginViewController = LoginViewController()
+            loginViewController.modalPresentationStyle = .fullScreen
+            present(loginViewController, animated: true, completion: nil)
+        }
+        
     }
+    
     
     @objc func editButtonTapped() {
         print("EDIT 버튼이 눌렸습니다.")
-        // 새로운 뷰 컨트롤러 생성
-        let thirdViewController = MyPageViewController3()
         
-        // 새로운 뷰 컨트롤러를 모달로 표시
-        present(thirdViewController, animated: true, completion: nil)
+        // 데이터를 가져올 때 사용할 NSFetchRequest
+        let fetchRequest = NSFetchRequest<UserInfo>(entityName: "UserInfo")
+        
+        // 가져온 데이터를 저장할 변수를 선언
+        var firstItem: UserInfo?
+        
+        // fetchFirstIdCoreData를 호출, 첫번째 데이터를 가져옴
+        if let fetchedItem = CoreDataManager.shared.fetchFirstIdCoreData(request: fetchRequest) {
+            firstItem = fetchedItem
+        } else {
+            // 데이터를 가져오지 못한 경우
+        }
+        
+        // firstItem을 사용하여 데이터를 조작하거나 표시
+        if let item = firstItem {
+            // MyPageViewController3에 데이터 전달
+            let thirdViewController = MyPageViewController3()
+            thirdViewController.userInfo = item // 데이터를 전달
+            
+            // 클로저를 사용하여 MyPageViewController2의 UI를 업데이트
+            thirdViewController.updateUserInfoClosure = { [weak self] updatedUserInfo in
+                DispatchQueue.main.async {
+                    // 클로저에서 업데이트된 데이터를 받아서 UI를 업데이트
+                    self?.nameTextField.text = updatedUserInfo?.name
+                    self?.idTextField.text = updatedUserInfo?.id
+                    self?.emailTextField.text = updatedUserInfo?.email
+                }
+            }
+            
+            present(thirdViewController, animated: true, completion: nil)
+            
+        }
     }
+
     
     // LoginStatus에 있는 coreData를 삭제.
     func logout(){
         let coreData = LoginStatus.fetchRequest()
         CoreDataManager.shared.deleteAllCoreData(request: coreData)
     }
+
 
 }

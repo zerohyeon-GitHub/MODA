@@ -32,12 +32,15 @@ class LikelistCell: UITableViewCell {
             thumbnailImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             thumbnailImageView.widthAnchor.constraint(equalToConstant: 100),
             thumbnailImageView.heightAnchor.constraint(equalToConstant: 100),
+            thumbnailImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
             titleLabel.leadingAnchor.constraint(equalTo: thumbnailImageView.trailingAnchor, constant: 10),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -5),
+            titleLabel.heightAnchor.constraint(equalToConstant: 100),
             
             idLabel.leadingAnchor.constraint(equalTo: thumbnailImageView.trailingAnchor, constant: 10),
-            idLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
+            idLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
         ])
     }
     

@@ -30,8 +30,10 @@
 		6A99C3602AA6B25B0046F042 /* MyPageView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A99C35F2AA6B25B0046F042 /* MyPageView3.swift */; };
 		6A9EDB4B2AA99FED006D284A /* LikelistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9EDB4A2AA99FED006D284A /* LikelistCell.swift */; };
 		EBC4695A2AAAA1E800CC2334 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC469592AAAA1E800CC2334 /* CoreDataManager.swift */; };
+
 		EBC4695D2AAABC7D00CC2334 /* LoginStatus+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC4695B2AAABC7D00CC2334 /* LoginStatus+CoreDataClass.swift */; };
 		EBC4695E2AAABC7D00CC2334 /* LoginStatus+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC4695C2AAABC7D00CC2334 /* LoginStatus+CoreDataProperties.swift */; };
+
 		EBDFF6882AA7017500875AA3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFF6872AA7017500875AA3 /* LoginViewController.swift */; };
 		EBDFF68B2AA7328000875AA3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFF68A2AA7328000875AA3 /* SignUpViewController.swift */; };
 		EBDFF68D2AA8040100875AA3 /* UsersInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFF68C2AA8040100875AA3 /* UsersInfo.swift */; };
@@ -63,11 +65,15 @@
 		6A99C35D2AA6B2520046F042 /* MyPageView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView2.swift; sourceTree = "<group>"; };
 		6A99C35F2AA6B25B0046F042 /* MyPageView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView3.swift; sourceTree = "<group>"; };
 		6A9EDB4A2AA99FED006D284A /* LikelistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikelistCell.swift; sourceTree = "<group>"; };
+
+		EBC469592AAAA1E800CC2334 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+
 		7E15CB980222AD1201D59B08 /* Pods_MODA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MODA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A47FC8B1FE687C5723B41150 /* Pods-MODA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MODA.release.xcconfig"; path = "Target Support Files/Pods-MODA/Pods-MODA.release.xcconfig"; sourceTree = "<group>"; };
 		EBC469592AAAA1E800CC2334 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		EBC4695B2AAABC7D00CC2334 /* LoginStatus+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginStatus+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EBC4695C2AAABC7D00CC2334 /* LoginStatus+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginStatus+CoreDataProperties.swift"; sourceTree = "<group>"; };
+
 		EBDFF6872AA7017500875AA3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EBDFF68A2AA7328000875AA3 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		EBDFF68C2AA8040100875AA3 /* UsersInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersInfo.swift; sourceTree = "<group>"; };
