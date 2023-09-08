@@ -109,3 +109,13 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: itemWidth, height: itemHeight)
     }
 }
+extension MainViewController {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedVideo = videos[indexPath.item]
+
+        let detailVC = DetailViewController()
+        detailVC.video = selectedVideo
+        
+        present(detailVC, animated: true, completion: nil)
+    }
+}
