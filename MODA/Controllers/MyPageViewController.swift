@@ -12,7 +12,11 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
     // 테이블 뷰
     let tableView = UITableView()
     
-    let videos: [Video] = []
+    var videos: [Video] = [] // 비디오 배열
+    
+    var selectedVideo: Video? // 선택된 비디오 정보
+    
+    let thumbnailImageView = UIImageView() // 썸네일 이미지를 표시할 뷰
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,35 +67,43 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
             button.widthAnchor.constraint(equalToConstant: 40),
             button.heightAnchor.constraint(equalTo: button.widthAnchor) // 버튼을 정사각형 모양으로 유지
         ])
+        
+        // 썸네일 이미지 뷰 설정
+        thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(thumbnailImageView)
+        
+        NSLayoutConstraint.activate([
+            thumbnailImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            thumbnailImageView.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 20),
+            thumbnailImageView.widthAnchor.constraint(equalToConstant: 100),
+            thumbnailImageView.heightAnchor.constraint(equalTo: thumbnailImageView.widthAnchor)
+        ])
+        
+        // 이미지 뷰에 선택된 비디오의 썸네일 이미지 설정
+        if let selectedVideo = selectedVideo {
+            let thumbnailImage = UIImage(named: selectedVideo.thumbnailImageName)
+            thumbnailImageView.image = thumbnailImage
+        }
     }
     
     @objc func buttonTapped() {
-        
         print("프로필 버튼이 눌렸습니다")
         
         // 새로운 뷰 컨트롤러 생성
         let secondViewController = MyPageViewController2()
-        
-        // 새로운 뷰 컨트롤러를 모달로 표시
         present(secondViewController, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        videos.count
+        return videos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! LikelistCell
-        
         let video = videos[indexPath.row]
         
-        // 썸네일 이미지 설정
         cell.thumbnailImageView.image = UIImage(named: "youtube")
-        
-        // 제목 설정
         cell.titleLabel.text = video.title
-        
-        // ID 설정
         cell.idLabel.text = "ID: \(String(video.id))"
         
         return cell
@@ -100,5 +112,4 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120 // 원하는 높이로 변경
     }
-    
 }
