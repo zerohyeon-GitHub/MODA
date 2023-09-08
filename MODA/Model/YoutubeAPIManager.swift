@@ -12,7 +12,14 @@ struct YoutubeAPIResponse: Codable {
     let nextPageToken: String?
     
     struct Item: Codable {
+        let id: String
+        let snippet: Snippet
+        let statistics: Statistics?
+        
         struct Snippet: Codable {
+            let title: String
+            let thumbnails: Thumbnails
+            
             struct Thumbnails: Codable {
                 struct Default: Codable {
                     let url: String
@@ -20,15 +27,14 @@ struct YoutubeAPIResponse: Codable {
                 
                 let `default`: Default
             }
-            
-            let title: String
-            let thumbnails: Thumbnails
         }
         
-        let id: String
-        let snippet: Snippet
+        struct Statistics: Codable {
+            let viewCount: String?
+        }
     }
 }
+
 
 class YoutubeAPIManager {
     let apiKey = "AIzaSyASzD9pPFFt4gxv20U2dXlwWvTVgLLzRek"
@@ -43,6 +49,7 @@ class YoutubeAPIManager {
             URLQueryItem(name: "maxResults", value: "20"),
             URLQueryItem(name: "key", value: apiKey),
             URLQueryItem(name: "regionCode", value: "KR")
+            
         ]
         
         if let nextPageToken = self.nextPageToken {
@@ -62,7 +69,7 @@ class YoutubeAPIManager {
                 let decoder = JSONDecoder()
                 let response = try decoder.decode(YoutubeAPIResponse.self, from: data)
                 self.nextPageToken = response.nextPageToken
-                completion(response.items.map { Video(id: $0.id, thumbnailImageName: $0.snippet.thumbnails.default.url, title: $0.snippet.title) })
+                completion(response.items.map { Video(id: $0.id, thumbnailImageName: $0.snippet.thumbnails.default.url, title: $0.snippet.title, viewCount: $0.statistics?.viewCount) })
             } catch {
                 print(error)
             }

@@ -51,10 +51,14 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
     // 테이블 뷰
     let tableView = UITableView()
     
+
     // 예제 데이터
     var videos: [Video] = [
     ]
     let apiManager = YoutubeAPIManager()
+
+    let videos: [Video] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,6 +136,7 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
             // 데이터를 가져오지 못한 경우
         }
         
+
         // firstItem을 사용하여 데이터를 조작하거나 표시
         if let item = firstItem {
             // MyPageViewController2에 데이터 전달
@@ -141,5 +146,30 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
             // 새로운 뷰 컨트롤러를 모달로 표시
             present(secondViewController, animated: true, completion: nil)
         }
+
+        // 새로운 뷰 컨트롤러를 모달로 표시
+        present(secondViewController, animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        videos.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! LikelistCell
+        
+        let video = videos[indexPath.row]
+        
+        // 썸네일 이미지 설정
+        cell.thumbnailImageView.image = UIImage(named: "youtube")
+        
+        // 제목 설정
+        cell.titleLabel.text = video.title
+        
+        // ID 설정
+        cell.idLabel.text = "ID: \(String(video.id))"
+        
+        return cell
+
     }
 }

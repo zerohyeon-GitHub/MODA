@@ -11,4 +11,5 @@ struct Video {
     let id: String
     let thumbnailImageName: String
     let title: String
+    let viewCount: String?
 }
