@@ -120,32 +120,8 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     @objc func buttonTapped() {
-        print("프로필 버튼이 눌렸습니다")
-        
-        // 데이터를 가져올 때 사용할 NSFetchRequest
-        let fetchRequest = NSFetchRequest<UserInfo>(entityName: "UserInfo")
-        
-        // 가져온 데이터를 저장할 변수를 선언
-        var firstItem: UserInfo?
-        
-        // fetchFirstIdCoreData를 호출, 첫번째 데이터를 가져옴
-        if let fetchedItem = CoreDataManager.shared.fetchFirstIdCoreData(request: fetchRequest) {
-            firstItem = fetchedItem
-        } else {
-            // 데이터를 가져오지 못한 경우
-        }
-        
-        
-        // firstItem을 사용하여 데이터를 조작하거나 표시
-        if let item = firstItem {
-            // MyPageViewController2에 데이터 전달
-            let secondViewController = MyPageViewController2()
-            secondViewController.userInfo = item // 데이터를 전달
-            
-            // 새로운 뷰 컨트롤러를 모달로 표시
-            present(secondViewController, animated: true, completion: nil)
-        }
-        
+        let secondViewController = MyPageViewController2()
+        present(secondViewController, animated: true, completion: nil)
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             videos.count
         }

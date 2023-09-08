@@ -34,6 +34,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarController = CustomTabBarController()
         tabBarController.viewControllers = [mainViewController, myPageViewController]
         
+        // 아이콘의 틴트 컬러를 블랙으로 설정
+        tabBarController.tabBar.tintColor = .black
+        
         // 윈도우 루트 뷰 컨트롤러 설정
         window.rootViewController = tabBarController
         
