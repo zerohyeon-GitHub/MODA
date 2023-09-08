@@ -50,7 +50,7 @@ class MainViewController: UIViewController {
                 if uniqueNewVideos.count > 0 {
                     self?.videos = uniqueNewVideos
                 }
-
+                
                 print("새로고침 완료, 새로운 영상 개수: \(uniqueNewVideos.count)")
                 self?.mainView.collectionView.reloadData()
                 self?.mainView.collectionView.refreshControl?.endRefreshing()
@@ -113,7 +113,7 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return videos.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCell", for: indexPath) as? VideoCell else {
             return UICollectionViewCell()
@@ -131,14 +131,15 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemWidth = collectionView.bounds.width / 2 - 4 // 2칸으로 나누고 간격을 뺌
         let itemHeight = itemWidth
-
+        
         return CGSize(width: itemWidth, height: itemHeight)
     }
 }
+
 extension MainViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedVideo = videos[indexPath.item]
-
+        
         let detailVC = DetailViewController()
         detailVC.video = selectedVideo
         
@@ -150,6 +151,16 @@ extension MainViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let updatedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string
         mainView.clearSearchButton.isHidden = updatedText.isEmpty
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let query = textField.text, !query.isEmpty {
+            let searchVC = SearchViewController()
+            searchVC.query = query
+            present(searchVC, animated: true, completion: nil)
+        }
+        
         return true
     }
 }
