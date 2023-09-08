@@ -13,6 +13,9 @@ class MyPageViewController3: UIViewController {
     // MyPageViewController2로부터 전달된 데이터를 저장할 변수
         var userInfo: UserInfo?
     
+    // 클로저 프로퍼티 정의
+        var updateUserInfoClosure: ((UserInfo?) -> Void)?
+    
     // 뷰 생성
     let nameLabel = UILabel()
 //    let idLabel = UILabel()
@@ -148,6 +151,12 @@ class MyPageViewController3: UIViewController {
                 print("사용자 데이터 업데이트 실패.")
                 // 오류 처리 또는 사용자에게 알림을 표시
             }
+        
+        // 데이터 업데이트 후 클로저를 호출하여 MyPageViewController2에 데이터를 업데이트합니다.
+                if let updatedUserInfo = userInfo {
+                    updateUserInfoClosure?(updatedUserInfo)
+                }
+        
         // 수정 완료 후 화면을 닫음
         dismiss(animated: true, completion: nil)
     }
