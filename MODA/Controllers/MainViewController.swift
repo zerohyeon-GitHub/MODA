@@ -64,8 +64,8 @@ extension MainViewController: UICollectionViewDataSource {
 
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth = collectionView.bounds.width / 2 - 4 // 2칸으로 나누고 간격을 뺌
-        let itemHeight = itemWidth * 4/3 // 4:3 비율
+        let itemWidth = collectionView.bounds.width / 2 - 4
+        let itemHeight = itemWidth * 4/3 
 
         return CGSize(width: itemWidth, height: itemHeight)
     }

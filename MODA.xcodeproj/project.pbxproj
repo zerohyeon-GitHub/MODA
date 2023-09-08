@@ -26,7 +26,7 @@
 		6A99C35C2AA6B1050046F042 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A99C35B2AA6B1050046F042 /* MyPageView.swift */; };
 		6A99C35E2AA6B2520046F042 /* MyPageView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A99C35D2AA6B2520046F042 /* MyPageView2.swift */; };
 		6A99C3602AA6B25B0046F042 /* MyPageView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A99C35F2AA6B25B0046F042 /* MyPageView3.swift */; };
-		9898B475248C0BA00559F763 /* Pods_MODA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34A319B73B51C4FA1141B582 /* Pods_MODA.framework */; };
+		BD42C78E6F9F957C3FE39964 /* Pods_MODA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F421176F4BBD8B94AD09FC12 /* Pods_MODA.framework */; };
 		EBDFF6882AA7017500875AA3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFF6872AA7017500875AA3 /* LoginViewController.swift */; };
 		EBDFF68B2AA7328000875AA3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFF68A2AA7328000875AA3 /* SignUpViewController.swift */; };
 		EBDFF68D2AA8040100875AA3 /* UsersInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFF68C2AA8040100875AA3 /* UsersInfo.swift */; };
@@ -58,7 +58,6 @@
 		27776D182AA5E4C600E226D3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		27776D1A2AA5E9D000E226D3 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		27D1898A2AA6AD66003A33FC /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
-		34A319B73B51C4FA1141B582 /* Pods_MODA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MODA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB1490F2AA8439E00935A78 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB149112AA8439E00935A78 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB149232AA8507100935A78 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
@@ -68,11 +67,12 @@
 		6A99C35B2AA6B1050046F042 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		6A99C35D2AA6B2520046F042 /* MyPageView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView2.swift; sourceTree = "<group>"; };
 		6A99C35F2AA6B25B0046F042 /* MyPageView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView3.swift; sourceTree = "<group>"; };
-		BE210C0593F6E4EA201EBACA /* Pods-MODA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MODA.debug.xcconfig"; path = "Target Support Files/Pods-MODA/Pods-MODA.debug.xcconfig"; sourceTree = "<group>"; };
+		C68BC8E4CFE0C84C378AC84F /* Pods-MODA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MODA.release.xcconfig"; path = "Target Support Files/Pods-MODA/Pods-MODA.release.xcconfig"; sourceTree = "<group>"; };
+		EB801279DD37B1CEDB25E1A7 /* Pods-MODA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MODA.debug.xcconfig"; path = "Target Support Files/Pods-MODA/Pods-MODA.debug.xcconfig"; sourceTree = "<group>"; };
 		EBDFF6872AA7017500875AA3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EBDFF68A2AA7328000875AA3 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		EBDFF68C2AA8040100875AA3 /* UsersInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersInfo.swift; sourceTree = "<group>"; };
-		F03407DA6207CD6275A3982D /* Pods-MODA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MODA.release.xcconfig"; path = "Target Support Files/Pods-MODA/Pods-MODA.release.xcconfig"; sourceTree = "<group>"; };
+		F421176F4BBD8B94AD09FC12 /* Pods_MODA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MODA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +82,7 @@
 			files = (
 				4EB1491B2AA845B500935A78 /* SwiftyJSON.framework in Frameworks */,
 				4EB1491C2AA845B800935A78 /* Alamofire.framework in Frameworks */,
-				9898B475248C0BA00559F763 /* Pods_MODA.framework in Frameworks */,
+				BD42C78E6F9F957C3FE39964 /* Pods_MODA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,8 +162,8 @@
 		2ACAEB72F9EB4D2B94E0E401 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BE210C0593F6E4EA201EBACA /* Pods-MODA.debug.xcconfig */,
-				F03407DA6207CD6275A3982D /* Pods-MODA.release.xcconfig */,
+				EB801279DD37B1CEDB25E1A7 /* Pods-MODA.debug.xcconfig */,
+				C68BC8E4CFE0C84C378AC84F /* Pods-MODA.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -173,7 +173,7 @@
 			children = (
 				4EB1490F2AA8439E00935A78 /* Alamofire.framework */,
 				4EB149112AA8439E00935A78 /* SwiftyJSON.framework */,
-				34A319B73B51C4FA1141B582 /* Pods_MODA.framework */,
+				F421176F4BBD8B94AD09FC12 /* Pods_MODA.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -185,12 +185,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 27776D0E2AA5C0B500E226D3 /* Build configuration list for PBXNativeTarget "MODA" */;
 			buildPhases = (
-				03F09980789EAC94336093F8 /* [CP] Check Pods Manifest.lock */,
+				7A8E985BF880CEB5DE1CDFB6 /* [CP] Check Pods Manifest.lock */,
 				27776CF32AA5C0B300E226D3 /* Sources */,
 				27776CF42AA5C0B300E226D3 /* Frameworks */,
 				27776CF52AA5C0B300E226D3 /* Resources */,
 				4EB149182AA8439F00935A78 /* Embed Frameworks */,
-				5667C944CBB975035E5B254B /* [CP] Embed Pods Frameworks */,
+				7B14B188127A9C5A917DD698 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -247,7 +247,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		03F09980789EAC94336093F8 /* [CP] Check Pods Manifest.lock */ = {
+		7A8E985BF880CEB5DE1CDFB6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -269,7 +269,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5667C944CBB975035E5B254B /* [CP] Embed Pods Frameworks */ = {
+		7B14B188127A9C5A917DD698 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -444,7 +444,7 @@
 		};
 		27776D0F2AA5C0B500E226D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE210C0593F6E4EA201EBACA /* Pods-MODA.debug.xcconfig */;
+			baseConfigurationReference = EB801279DD37B1CEDB25E1A7 /* Pods-MODA.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -475,7 +475,7 @@
 		};
 		27776D102AA5C0B500E226D3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F03407DA6207CD6275A3982D /* Pods-MODA.release.xcconfig */;
+			baseConfigurationReference = C68BC8E4CFE0C84C378AC84F /* Pods-MODA.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

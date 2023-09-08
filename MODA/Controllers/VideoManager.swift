@@ -18,9 +18,9 @@ class VideoDataManager {
     private init() {}
     
     func fetchYouTubeVideos(completion: @escaping ([Video]) -> Void) {
-        let apiKey = "AIzaSyAy1spfkdGpVuB4fvJMvCSkde0YArxJnG8"
+        let apiKey = "AIzaSyAy1spfkdGpVuB4fvJMvCSkde0YArxJnG8" 
         let baseURL = "https://www.googleapis.com/youtube/v3/search"
-        let searchQuery = "헬스" //
+        let searchQuery = "침착맨"
         
         let parameters: [String: Any] = [
             "key": apiKey,
@@ -43,13 +43,18 @@ class VideoDataManager {
                                let title = item["snippet"]["title"].string,
                                let thumbnailURL = item["snippet"]["thumbnails"]["medium"]["url"].string {
                                 let videoURL = "https://www.youtube.com/watch?v=\(videoId)"
-                                let video = Video(id: videoId, thumbnailImageName: thumbnailURL, title: title, videoURL: videoURL)
+                                
+                                let viewCount = 0
+                                
+                                let video = Video(id: videoId, thumbnailImageName: thumbnailURL, title: title, videoURL: videoURL, viewCount: viewCount)
                                 videos.append(video)
+                                
+                                if videos.count == items.count {
+                                    completion(videos)
+                                }
                             }
                         }
                     }
-                    
-                    completion(videos)
                     
                 case .failure(let error):
                     print("Error: \(error)")
@@ -58,8 +63,4 @@ class VideoDataManager {
             }
     }
 }
-
-
-
-
 

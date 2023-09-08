@@ -64,6 +64,8 @@ class VideoCell: UICollectionViewCell {
         
         // Kingfisher를 사용하여 이미지 로드
         if let thumbnailImageURL = URL(string: video.thumbnailImageName) {
+            print("Loading image from URL: \(thumbnailImageURL)") // 이 부분에 로그 추가
+
             thumbnailImageView.kf.setImage(with: .network(thumbnailImageURL))
         }
     }
