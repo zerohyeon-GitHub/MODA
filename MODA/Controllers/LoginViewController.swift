@@ -82,7 +82,7 @@ class LoginViewController: UIViewController {
     private let idLabel: UILabel = {
         let label = UILabel()
         label.text = "ID"
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.textColor = .black
         
         return label
@@ -99,7 +99,7 @@ class LoginViewController: UIViewController {
         textField.spellCheckingType = .no // 맞춤법 검사 활성화 여부
         textField.keyboardType = .emailAddress // 키보드 타입
         
-        textField.addTarget(LoginViewController.self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+        textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         
         return textField
     }()
@@ -123,7 +123,7 @@ class LoginViewController: UIViewController {
     private let pwLabel: UILabel = {
         let label = UILabel()
         label.text = "PASSWORD"
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.textColor = .black
         
         return label
@@ -143,12 +143,13 @@ class LoginViewController: UIViewController {
         textField.clearButtonMode = .always // 입력 내용 한번에 지우는 X버튼
         textField.clearsOnBeginEditing = false // 편집 시 기존 텍스트필드값 제거
         
-        textField.addTarget(LoginViewController.self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+        textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         
         return textField
     }()
     
     @objc private func textFieldEditingChanged(_ textField: UITextField) {
+        print("textFieldEditingChanged 입력")
         // text가 입력이 되었는지 확인
         if textField.text?.count == 1 {
             if textField.text?.first == " " {
@@ -215,7 +216,7 @@ class LoginViewController: UIViewController {
         // 회원가입 창 이동
         print("회원가입 이동")
         let vc = SignUpViewController()
-        vc.modalPresentationStyle = .fullScreen
+//        vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
 //        //만들기
 //        let alert = UIAlertController(title: "비밀번호 재설정", message: "비밀번호를 재설정?", preferredStyle: .alert)
