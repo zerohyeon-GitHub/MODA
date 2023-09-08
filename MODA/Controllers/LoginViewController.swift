@@ -82,7 +82,7 @@ class LoginViewController: UIViewController {
     private let idLabel: UILabel = {
         let label = UILabel()
         label.text = "ID"
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.textColor = .black
         
         return label
@@ -123,7 +123,7 @@ class LoginViewController: UIViewController {
     private let pwLabel: UILabel = {
         let label = UILabel()
         label.text = "PASSWORD"
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.textColor = .black
         
         return label
@@ -216,7 +216,7 @@ class LoginViewController: UIViewController {
         // 회원가입 창 이동
         print("회원가입 이동")
         let vc = SignUpViewController()
-        vc.modalPresentationStyle = .fullScreen
+//        vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
 //        //만들기
 //        let alert = UIAlertController(title: "비밀번호 재설정", message: "비밀번호를 재설정?", preferredStyle: .alert)
