@@ -7,9 +7,9 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class SignUpViewController: UIViewController {
-    
     // MARK: - Properties
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -33,6 +33,7 @@ class SignUpViewController: UIViewController {
     
     private let nameTextField: UITextField = {
         let textField = UITextField()
+        textField.borderStyle = .roundedRect
         textField.textColor = .black
         textField.tintColor = .black
         textField.autocapitalizationType = .none
@@ -65,6 +66,7 @@ class SignUpViewController: UIViewController {
     
     private let idTextField: UITextField = {
         let textField = UITextField()
+        textField.borderStyle = .roundedRect
         textField.textColor = .black
         textField.tintColor = .black
         textField.autocapitalizationType = .none
@@ -97,6 +99,7 @@ class SignUpViewController: UIViewController {
     
     private let pwTextField: UITextField = {
         let textField = UITextField()
+        textField.borderStyle = .roundedRect
         textField.textColor = .black
         textField.tintColor = .black
         textField.autocapitalizationType = .none
@@ -130,6 +133,7 @@ class SignUpViewController: UIViewController {
     
     private let pwCheckTextField: UITextField = {
         let textField = UITextField()
+        textField.borderStyle = .roundedRect
         textField.textColor = .black
         textField.tintColor = .black
         textField.autocapitalizationType = .none
@@ -163,6 +167,7 @@ class SignUpViewController: UIViewController {
     
     private let emailTextField: UITextField = {
         let textField = UITextField()
+        textField.borderStyle = .roundedRect
         textField.textColor = .black
         textField.tintColor = .black
         textField.autocapitalizationType = .none
@@ -185,13 +190,114 @@ class SignUpViewController: UIViewController {
     
     private lazy var inputStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [nameStackView, idStackView, pwStackView, pwCheckStackView, emailStackView])
-        stackView.spacing = 30
+        stackView.spacing = 20
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
         
         return stackView
     }()
+    
+    private lazy var signUpButton: UIButton = {
+        
+        let button = UIButton()
+        
+        button.backgroundColor = .black
+        button.setTitle("가입", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        
+        button.addTarget(self, action: #selector(saveData), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    // 리셋버튼이 눌리면 동작하는 함수
+    @objc func saveData() {
+        // 데이터 저장.
+        print("save Data")
+        
+        if nameTextField.text == "" {
+            alertMessage(title: "회원가입", message: "name")
+        } else if idTextField.text == "" {
+            alertMessage(title: "회원가입", message: "id")
+        } else if pwTextField.text == "" {
+            alertMessage(title: "회원가입", message: "pw")
+        } else if pwCheckTextField.text == "" {
+            alertMessage(title: "회원가입", message: "pw check")
+        } else {
+            let data = UsersInfo(name: nameTextField.text ?? "", id: idTextField.text ?? "", pw: pwTextField.text ?? "", email: emailTextField.text ?? "")
+            CoreDataManager.shared.insertCoreData(userInfo: data)
+        }
+    }
+    
+    private lazy var fetchButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .black
+        button.setTitle("Fetch) Core data 전체 확인", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        
+        button.addTarget(self, action: #selector(fetchData), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    @objc func fetchData() {
+        print("fetch button")
+        let coreData = UserInfo.fetchRequest()
+        let fetch = CoreDataManager.shared.fetchCoreData(request: coreData)
+        // 데이터 하나씩 출력
+        for result in fetch {
+            let data = UsersInfo(name: result.name ?? "", id: result.id ?? "", pw: result.pw ?? "", email: result.email ?? "")
+            print("data: \(data)")
+        }
+    }
+    
+    private lazy var deleteButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .black
+        button.setTitle("데이터 수정 가능한지 확인", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        
+        button.addTarget(self, action: #selector(deleteData), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    @objc func deleteData() {
+        print("delete All Button")
+        let coreData = UserInfo.fetchRequest()
+//        deleteAllCoreData(request: coreData)
+        CoreDataManager.shared.editUserInfoCoreData(request: coreData, id: idTextField.text ?? "", name: nameTextField.text ?? "")
+    }
+    
+    private lazy var oneDeleteButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .black
+        button.setTitle("id에 있는 text를 읽어와서 core data에서 삭제", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(oneDeleteData), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func oneDeleteData() {
+        print("One delete Button")
+        let coreData = UserInfo.fetchRequest()
+        let fetchResult = CoreDataManager.shared.fetchCoreData(request: UserInfo.fetchRequest())
+        
+        let count = CoreDataManager.shared.countCoreData(request: UserInfo.fetchRequest())
+        print("Core 데이터 Count : \(count)")
+        CoreDataManager.shared.deleteMyListCoreData(request: coreData, id: idTextField.text ?? "")
+    }
+    
+    func alertMessage(title: String, message: String) {
+        if true {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+    }
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -206,7 +312,7 @@ class SignUpViewController: UIViewController {
     private func configure() {
         view.backgroundColor = UIColor.white
         
-        [titleLabel, inputStackView].forEach {
+        [titleLabel, inputStackView, signUpButton, fetchButton, deleteButton, oneDeleteButton].forEach {
             view.addSubview($0)
         }
     }
@@ -215,6 +321,10 @@ class SignUpViewController: UIViewController {
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         inputStackView.translatesAutoresizingMaskIntoConstraints = false
+        signUpButton.translatesAutoresizingMaskIntoConstraints = false
+        fetchButton.translatesAutoresizingMaskIntoConstraints = false
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        oneDeleteButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -224,6 +334,34 @@ class SignUpViewController: UIViewController {
             inputStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
             inputStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             inputStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            fetchButton.topAnchor.constraint(equalTo: inputStackView.bottomAnchor, constant: 20),
+            fetchButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            fetchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            deleteButton.topAnchor.constraint(equalTo: fetchButton.bottomAnchor, constant: 10),
+            deleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            deleteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            oneDeleteButton.topAnchor.constraint(equalTo: deleteButton.bottomAnchor, constant: 10),
+            oneDeleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            oneDeleteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            signUpButton.heightAnchor.constraint(equalToConstant: 30),
+            signUpButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
         ])
+    }
+}
+
+extension UITextField {
+    func underLined(viewSize: CGFloat, color: UIColor) {
+        let border = CALayer()
+        let width = CGFloat(1)
+        border.borderColor = color.cgColor
+        border.frame = CGRect(x: 0, y: frame.size.height + 10, width: viewSize, height: 1)
+        border.borderWidth = width
+        layer.addSublayer(border)
     }
 }

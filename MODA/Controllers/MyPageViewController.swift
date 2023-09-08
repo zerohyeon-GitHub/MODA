@@ -12,19 +12,7 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
     // 테이블 뷰
     let tableView = UITableView()
     
-    // 예제 데이터
-    let videos: [Video] = [
-//        Video(id: 1, thumbnailImageName: "video100", title: "Video 111"),
-//        Video(id: 2, thumbnailImageName: "video200", title: "Video 222"),
-//        Video(id: 3, thumbnailImageName: "video300", title: "Video 333"),
-//        Video(id: 4, thumbnailImageName: "video400", title: "Video 444"),
-//        Video(id: 5, thumbnailImageName: "video500", title: "Video 555"),
-//        Video(id: 6, thumbnailImageName: "video600", title: "Video 666"),
-//        Video(id: 7, thumbnailImageName: "video700", title: "Video 777"),
-//        Video(id: 8, thumbnailImageName: "video800", title: "Video 888"),
-//        Video(id: 9, thumbnailImageName: "video900", title: "Video 999"),
-        
-    ]
+    let videos: [Video] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,19 +82,19 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! LikelistCell
-            
-            let video = videos[indexPath.row]
-            
-            // 썸네일 이미지 설정
-            cell.thumbnailImageView.image = UIImage(named: "youtube")
-            
-            // 제목 설정
-            cell.titleLabel.text = video.title
-            
-            // ID 설정
-            cell.idLabel.text = "ID: \(String(video.id))"
-            
-            return cell
+        
+        let video = videos[indexPath.row]
+        
+        // 썸네일 이미지 설정
+        cell.thumbnailImageView.image = UIImage(named: "youtube")
+        
+        // 제목 설정
+        cell.titleLabel.text = video.title
+        
+        // ID 설정
+        cell.idLabel.text = "ID: \(String(video.id))"
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
