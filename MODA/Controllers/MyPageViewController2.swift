@@ -135,6 +135,7 @@ class MyPageViewController2: UIViewController {
                     self.dismiss(animated: true, completion: nil)
                 }
             } else {
+                logout()
                 // 화면2가 아닌 경우
                 // 새로운 화면1을 띄움
                 let LoginViewController = LoginViewController()
@@ -150,6 +151,12 @@ class MyPageViewController2: UIViewController {
         
         // 새로운 뷰 컨트롤러를 모달로 표시
         present(thirdViewController, animated: true, completion: nil)
+    }
+    
+    // LoginStatus에 있는 coreData를 삭제.
+    func logout(){
+        let coreData = LoginStatus.fetchRequest()
+        CoreDataManager.shared.deleteAllCoreData(request: coreData)
     }
 
 }

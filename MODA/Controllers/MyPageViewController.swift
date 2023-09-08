@@ -13,18 +13,7 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
     let tableView = UITableView()
     
     // 예제 데이터
-    let videos: [Video] = [
-        Video(id: 1, thumbnailImageName: "video100", title: "Video 111"),
-        Video(id: 2, thumbnailImageName: "video200", title: "Video 222"),
-        Video(id: 3, thumbnailImageName: "video300", title: "Video 333"),
-        Video(id: 4, thumbnailImageName: "video400", title: "Video 444"),
-        Video(id: 5, thumbnailImageName: "video500", title: "Video 555"),
-        Video(id: 6, thumbnailImageName: "video600", title: "Video 666"),
-        Video(id: 7, thumbnailImageName: "video700", title: "Video 777"),
-        Video(id: 8, thumbnailImageName: "video800", title: "Video 888"),
-        Video(id: 9, thumbnailImageName: "video900", title: "Video 999"),
-        
-    ]
+    let videos: [Video] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

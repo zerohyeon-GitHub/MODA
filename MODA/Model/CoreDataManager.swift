@@ -13,11 +13,35 @@ class CoreDataManager {
     
     static let shared = CoreDataManager()
     
-    // MARK: Core Data 함수
+    // MARK: Core Data 함수 - LoginStatus
+    // Core Data Insert
+    func statusCoreData(loginStatusInfo: LoginStatusInfo) {
+        print("insert Core Data")
+        // NSManagedObjectContext를 가져온다.
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        // Entity를 가져온다.
+        let entity = NSEntityDescription.entity(forEntityName: "LoginStatus", in: context)
+        
+        if let entity = entity {
+            let managedObject = NSManagedObject(entity: entity, insertInto: context)
+            
+            managedObject.setValue(loginStatusInfo.status, forKey: "status")
+            managedObject.setValue(loginStatusInfo.id, forKey: "id")
+            
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        } else {
+        }
+    }
+    
+    // MARK: Core Data 함수 - UserInfo
     // Core Data Insert
     func insertCoreData(userInfo: UsersInfo) -> Bool {
         print("insert Core Data")
-        print("userinfo : \(userInfo)")
         // NSManagedObjectContext를 가져온다.
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext

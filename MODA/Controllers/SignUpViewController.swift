@@ -217,13 +217,13 @@ class SignUpViewController: UIViewController {
         print("save Data")
         
         if nameTextField.text == "" {
-            alertMessage(message: "name")
+            alertMessage(title: "회원가입", message: "name")
         } else if idTextField.text == "" {
-            alertMessage(message: "id")
+            alertMessage(title: "회원가입", message: "id")
         } else if pwTextField.text == "" {
-            alertMessage(message: "pw")
+            alertMessage(title: "회원가입", message: "pw")
         } else if pwCheckTextField.text == "" {
-            alertMessage(message: "pw check")
+            alertMessage(title: "회원가입", message: "pw check")
         } else {
             let data = UsersInfo(name: nameTextField.text ?? "", id: idTextField.text ?? "", pw: pwTextField.text ?? "", email: emailTextField.text ?? "")
             CoreDataManager.shared.insertCoreData(userInfo: data)
@@ -289,9 +289,9 @@ class SignUpViewController: UIViewController {
         CoreDataManager.shared.deleteMyListCoreData(request: coreData, id: idTextField.text ?? "")
     }
     
-    func alertMessage(message: String) {
+    func alertMessage(title: String, message: String) {
         if true {
-            let alert = UIAlertController(title: "회원가입", message: message, preferredStyle: .alert)
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "확인", style: .default)
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)

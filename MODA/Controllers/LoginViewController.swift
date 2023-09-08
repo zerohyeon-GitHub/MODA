@@ -47,16 +47,7 @@ class LoginViewController: UIViewController {
         let imageView = UIImageView()
         
         imageView.contentMode = .scaleAspectFill
-//        imageView.layer.cornerRadius = 150
         imageView.layer.masksToBounds = true
-//        imageView.layer.borderColor = UIColor.lightGray.cgColor
-//        imageView.layer.borderWidth = 0.5
-        
-//        imageView.contentMode = .scaleAspectFill
-//        imageView.layer.cornerRadius = 60
-//        imageView.clipsToBounds = true
-//        imageView.layer.borderWidth = 1
-//        imageView.layer.borderColor = UIColor.black.cgColor
         
         imageView.image = UIImage(named: "appLogo")
         
@@ -149,7 +140,6 @@ class LoginViewController: UIViewController {
     }()
     
     @objc private func textFieldEditingChanged(_ textField: UITextField) {
-        print("textFieldEditingChanged 입력")
         // text가 입력이 되었는지 확인
         if textField.text?.count == 1 {
             if textField.text?.first == " " {
@@ -186,11 +176,44 @@ class LoginViewController: UIViewController {
     
     // 로그인 버튼 누르면 동작하는 함수
     @objc private func loginButtonTapped() {
-        // ID와 PW가 일치하면 로그인
+        // TextField에 입력된 text 가져오기
+        let inputId: String = idTextField.text ?? ""
+        let inputPw: String = pwTextField.text ?? ""
+        // CoreData에서 가져온데이터를 저장할 곳
+        var searchCoreData: UsersInfo = UsersInfo(name: "", id: "", pw: "", email: "")
         
-        // Main화면으로 이동하는 기능
-        print("Main 화면으로 넘어가기")
+        let coreData = UserInfo.fetchRequest() // CoreData
+        let fetchResult = CoreDataManager.shared.fetchIdCoreData(request: coreData, id: inputId)
+        for result in fetchResult {
+            searchCoreData = UsersInfo(name: result.name ?? "", id: result.id ?? "", pw: result.pw ?? "", email: result.email ?? "")
+        }
         
+        // ID와 PW가 일치여부 확인
+        if inputPw == searchCoreData.pw { // 일치한 경우
+            // LogiStatus Entity에 데이터가 있는지 확인.
+            let coreData = LoginStatus.fetchRequest()
+            let status: LoginStatusInfo = LoginStatusInfo(status: true, id: inputId)
+            
+            print("count : \(CoreDataManager.shared.countCoreData(request: coreData))")
+            
+            if CoreDataManager.shared.countCoreData(request: coreData) == 0 { // 없는 경우 데이터 추가
+                CoreDataManager.shared.statusCoreData(loginStatusInfo: status) // 데이터 추가
+            } else if CoreDataManager.shared.countCoreData(request: coreData) == 1 { // 있는 경우 데이터 삭제 후 추가
+                CoreDataManager.shared.deleteAllCoreData(request: coreData) // 전체 데이터 삭제
+                CoreDataManager.shared.statusCoreData(loginStatusInfo: status) // 새로 데이터 추가
+            } else { // 애초에 데이터가 많이 쌓인 경우 에러. (이러면 큰일남.. 왜냐하면 LoginStatus Core Data가 안지워지고 있다는 뜻)
+                print("LoginStatus Core Data가 1개 이상이다.")
+            }
+            // 메인 화면으로 이동.
+            print("Main 화면으로 넘어가기")
+            let vc = MainViewController()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+            
+        } else { // 일치하지 않은 경우
+            SignUpViewController().alertMessage(title: "로그인", message: "ID와 PASSWORD를 확인해주세요.")
+            print("PW가 맞지 않음.")
+        }
     }
     
     private lazy var signUpButton: UIButton = {
@@ -214,26 +237,12 @@ class LoginViewController: UIViewController {
     // MARK: 회원 가입
     @objc func signUpButtonTapped() {
         // 회원가입 창 이동
-        print("회원가입 이동")
         let vc = SignUpViewController()
 //        vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
-//        //만들기
-//        let alert = UIAlertController(title: "비밀번호 재설정", message: "비밀번호를 재설정?", preferredStyle: .alert)
-//        let success = UIAlertAction(title: "확인", style: .default) { action in
-//            print("확인버튼이 눌렸습니다.")
-//        }
-//        let cancel = UIAlertAction(title: "취소", style: .cancel) { action in
-//            print("취소버튼이 눌렸습니다.")
-//        }
-//        alert.addAction(success)
-//        alert.addAction(cancel)
-//        // 실제 띄우기
-//        self.present(alert, animated: true , completion: nil)
     }
     
     // 이메일텍스트필드, 패스워드, 로그인버튼 스택뷰에 배치
-    
     private lazy var stackViewTextField: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [idTextFieldView, pwTextFieldView])
         stackView.spacing = 20
@@ -318,8 +327,6 @@ class LoginViewController: UIViewController {
     // MARK: - Initializers
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("test")
         
         configure()
         setupAutoLayout()
