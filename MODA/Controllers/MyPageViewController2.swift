@@ -6,22 +6,32 @@
 //
 
 import UIKit
+import CoreData
 
 class MyPageViewController2: UIViewController {
     
+    // MyPageViewController의 buttonTapped에서 가져온 데이터를 저장할 변수
+    var userInfo: UserInfo?
+    
+    // 뷰 생성
+    let nameLabel = UILabel()
+    let idLabel = UILabel()
+    let emailLabel = UILabel()
+    
+    let nameTextField = UITextField()
+    let idTextField = UITextField()
+    let emailTextField = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        // 뷰 생성
-        let nameLabel = UILabel()
-        let idLabel = UILabel()
-        let emailLabel = UILabel()
-        
-        let nameTextField = UITextField()
-        let idTextField = UITextField()
-        let emailTextField = UITextField()
+        // MyPageViewController의 buttonTapped에서 가져온 데이터를 텍스트 필드에 표시
+                if let userInfo = userInfo {
+                    nameTextField.text = userInfo.name
+                    idTextField.text = userInfo.id
+                    emailTextField.text = userInfo.email
+                }
         
         // 최상단에 프로필 타이틀 추가
         let profileTitleLabel = UILabel()
@@ -145,11 +155,35 @@ class MyPageViewController2: UIViewController {
     
     @objc func editButtonTapped() {
         print("EDIT 버튼이 눌렸습니다.")
-        // 새로운 뷰 컨트롤러 생성
+
+        // 데이터를 가져올 때 사용할 NSFetchRequest
+            let fetchRequest = NSFetchRequest<UserInfo>(entityName: "UserInfo")
+
+        // 가져온 데이터를 저장할 변수를 선언
+            var firstItem: UserInfo?
+
+        // fetchFirstIdCoreData를 호출, 첫번째 데이터를 가져옴
+            if let fetchedItem = CoreDataManager.shared.fetchFirstIdCoreData(request: fetchRequest) {
+                firstItem = fetchedItem
+            } else {
+                // 데이터를 가져오지 못한 경우
+            }
+
+        // firstItem을 사용하여 데이터를 조작하거나 표시
+            if let item = firstItem {
+                // MyPageViewController3에 데이터 전달
+                let thirdViewController = MyPageViewController3()
+                thirdViewController.userInfo = item // 데이터를 전달
+                
+                // 새로운 뷰 컨트롤러를 모달로 표시
+                present(thirdViewController, animated: true, completion: nil)
+            } else {
+                // 데이터를 가져오지 못한 경우
+            }
         let thirdViewController = MyPageViewController3()
-        
         // 새로운 뷰 컨트롤러를 모달로 표시
         present(thirdViewController, animated: true, completion: nil)
+        
     }
 
 }

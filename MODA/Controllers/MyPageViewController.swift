@@ -6,32 +6,71 @@
 //
 
 import UIKit
+import CoreData
 
 class MyPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        videos.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LikeCell", for: indexPath) as! LikelistCell
+        
+        let video = videos[indexPath.row]
+        
+        if let thumbnailURL = URL(string: video.thumbnailImageName) {
+            URLSession.shared.dataTask(with: thumbnailURL) { data, _, error in
+                if let error = error {
+                    print("이미지 다운로드 오류: \(error.localizedDescription)")
+                    return
+                }
+                
+                if let data = data, let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        cell.thumbnailImageView.image = image // 'cell'의 'thumbnailImageView'에 이미지 설정
+                    }
+                }
+            }.resume()
+        }
+        
+        // 제목 설정
+        cell.titleLabel.text = video.title
+        cell.titleLabel.numberOfLines = 4 // 두 줄까지 표시되도록 설정
+        cell.titleLabel.lineBreakMode = .byWordWrapping // 줄 바꿈 설정
+        
+        // ID 설정
+        cell.idLabel.text = "ID: \(video.id)"
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150 // 원하는 높이로 변경
+    }
     
     // 테이블 뷰
     let tableView = UITableView()
     
     // 예제 데이터
-    let videos: [Video] = [
-        Video(id: 1, thumbnailImageName: "video100", title: "Video 111"),
-        Video(id: 2, thumbnailImageName: "video200", title: "Video 222"),
-        Video(id: 3, thumbnailImageName: "video300", title: "Video 333"),
-        Video(id: 4, thumbnailImageName: "video400", title: "Video 444"),
-        Video(id: 5, thumbnailImageName: "video500", title: "Video 555"),
-        Video(id: 6, thumbnailImageName: "video600", title: "Video 666"),
-        Video(id: 7, thumbnailImageName: "video700", title: "Video 777"),
-        Video(id: 8, thumbnailImageName: "video800", title: "Video 888"),
-        Video(id: 9, thumbnailImageName: "video900", title: "Video 999"),
-        
+    var videos: [Video] = [
     ]
+    let apiManager = YoutubeAPIManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
+        // API 관리자를 사용하여 인기 동영상 가져오기
+        apiManager.fetchPopularVideos { [weak self] videos in
+            DispatchQueue.main.async {
+                self?.videos = videos
+                self?.tableView.reloadData()
+                
+            }
+        }
+        
         // Register the custom cell class (커스텀 셀 클래스를 등록)
-        tableView.register(LikelistCell.self, forCellReuseIdentifier: "VideoCell")
+        tableView.register(LikelistCell.self, forCellReuseIdentifier: "LikeCell")
         
         // 테이블 뷰 설정
         tableView.dataSource = self
@@ -78,39 +117,29 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     @objc func buttonTapped() {
-        
         print("프로필 버튼이 눌렸습니다")
         
-        // 새로운 뷰 컨트롤러 생성
-        let secondViewController = MyPageViewController2()
+        // 데이터를 가져올 때 사용할 NSFetchRequest
+        let fetchRequest = NSFetchRequest<UserInfo>(entityName: "UserInfo")
         
-        // 새로운 뷰 컨트롤러를 모달로 표시
-        present(secondViewController, animated: true, completion: nil)
+        // 가져온 데이터를 저장할 변수를 선언
+        var firstItem: UserInfo?
+        
+        // fetchFirstIdCoreData를 호출, 첫번째 데이터를 가져옴
+        if let fetchedItem = CoreDataManager.shared.fetchFirstIdCoreData(request: fetchRequest) {
+            firstItem = fetchedItem
+        } else {
+            // 데이터를 가져오지 못한 경우
+        }
+        
+        // firstItem을 사용하여 데이터를 조작하거나 표시
+        if let item = firstItem {
+            // MyPageViewController2에 데이터 전달
+            let secondViewController = MyPageViewController2()
+            //            secondViewController.userInfo = item // 데이터를 전달
+            
+            // 새로운 뷰 컨트롤러를 모달로 표시
+            present(secondViewController, animated: true, completion: nil)
+        }
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        videos.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! LikelistCell
-            
-            let video = videos[indexPath.row]
-            
-            // 썸네일 이미지 설정
-            cell.thumbnailImageView.image = UIImage(named: "youtube")
-            
-            // 제목 설정
-            cell.titleLabel.text = video.title
-            
-            // ID 설정
-            cell.idLabel.text = "ID: \(video.id)"
-            
-            return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120 // 원하는 높이로 변경
-    }
-    
 }

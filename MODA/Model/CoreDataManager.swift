@@ -178,4 +178,65 @@ class CoreDataManager {
             return false
         }
     }
+    
+    // 배열의 첫번째 ID Core Data Fetch
+    func fetchFirstIdCoreData<T: NSManagedObject>(request: NSFetchRequest<T>) -> T? {
+        print("fetch Core Data")
+        
+        // NSManagedObjectContext를 가져온다.
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        // fetchLimit은 fetch 한번에 읽어 올 데이터의 양
+        // 첫 번째 결과만 필요하므로 fetchLimit을 1로 설정
+        request.fetchLimit = 1
+        
+        do {
+            let fetchResult = try context.fetch(request)
+            // fetchResult 배열에서 첫 번째 요소를 반환
+            return fetchResult.first
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
+    // MyPageView3에서 사용자 정보 수정 기능
+    func editFirstUserInfoCoreData(id: String, name: String, email: String, pw: String) -> Bool {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request: NSFetchRequest<UserInfo> = UserInfo.fetchRequest()
+        request.predicate = NSPredicate(format: "id = %@", id)
+        
+        do {
+            let fetchResult = try context.fetch(request)
+            if fetchResult.count == 0 {
+                print("editUserInfoCoreData : false")
+                return false
+            } else {
+                // 사용자 정보 업데이트
+                if let user = fetchResult.first {
+                    user.name = name
+                    user.email = email
+                    user.pw = pw
+                    
+                    do {
+                        try context.save()
+                        print("editUserInfoCoreData : true")
+                        return true
+                    } catch {
+                        print(error.localizedDescription)
+                        return false
+                    }
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
+            return false
+        }
+        
+        // 여기서도 반환값을 제공
+        return false
+    }
 }
