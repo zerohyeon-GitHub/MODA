@@ -34,6 +34,11 @@ class MainViewController: UIViewController {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshVideos), for: .valueChanged)
         mainView.collectionView.refreshControl = refreshControl
+        
+        mainView.searchButton.addTarget(self, action: #selector(openSearchViewController), for: .touchUpInside)
+        mainView.clearSearchButton.addTarget(self, action: #selector(closeSearch), for: .touchUpInside)
+        
+        mainView.searchTextField.delegate = self
     }
     
     @objc func refreshVideos() {
@@ -51,6 +56,27 @@ class MainViewController: UIViewController {
                 self?.mainView.collectionView.refreshControl?.endRefreshing()
             }
         }
+    }
+    
+    @objc func openSearchViewController() {
+        if mainView.searchView.isHidden {
+            mainView.searchView.isHidden = false
+            UIView.animate(withDuration: 0.3) {
+                self.mainView.layoutIfNeeded()
+            }
+        } else {
+            mainView.searchView.isHidden = true
+            UIView.animate(withDuration: 0.3) {
+                self.mainView.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc func closeSearch() {
+        mainView.searchView.isHidden = true
+        mainView.clearSearchButton.isHidden = true
+        mainView.searchTextField.text = ""
+        mainView.searchTextField.resignFirstResponder()
     }
 }
 
@@ -117,5 +143,13 @@ extension MainViewController {
         detailVC.video = selectedVideo
         
         present(detailVC, animated: true, completion: nil)
+    }
+}
+
+extension MainViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let updatedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? string
+        mainView.clearSearchButton.isHidden = updatedText.isEmpty
+        return true
     }
 }
