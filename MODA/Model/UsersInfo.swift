@@ -14,3 +14,8 @@ struct UsersInfo {
     var email: String
 //    var video: [Video]
 }
+
+struct LoginStatusInfo {
+    var status: Bool
+    var id: String
+}
