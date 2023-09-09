@@ -6,7 +6,8 @@ target 'MODA' do
   use_frameworks!
 
   # Pods for MODA
-pod "YoutubePlayer-in-WKWebView"
+
+   pod "YoutubePlayer-in-WKWebView"
 
 end
 post_install do |installer|
@@ -18,3 +19,4 @@ post_install do |installer|
           end
    end
 end
+

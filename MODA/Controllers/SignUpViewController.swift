@@ -255,7 +255,7 @@ class SignUpViewController: UIViewController {
     private lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .black
-        button.setTitle("데이터 수정 가능한지 확인", for: .normal)
+        button.setTitle("UserInfo의 Video relation 데이터 수정 가능한지 확인", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         
         button.addTarget(self, action: #selector(deleteData), for: .touchUpInside)

@@ -263,4 +263,38 @@ class CoreDataManager {
         // 여기서도 반환값을 제공
         return false
     }
+    
+    // 사용자 정보 중 연동 확인.
+    func videoCoreData<T: NSManagedObject>(request: NSFetchRequest<T>, id: String) -> Bool {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        request.predicate = NSPredicate(format: "id = %@", id)
+        
+        let videoObject = NSEntityDescription.insertNewObject(forEntityName: "Videos", into: context) as! Videos
+        
+        videoObject.setValue("id", forKey: "id")
+        videoObject.setValue("thumbnailImageName", forKey: "thumbnailImageName")
+        videoObject.setValue("title", forKey: "title")
+        videoObject.setValue("viewcount", forKey: "viewcount")
+        
+//        UserInfo.addToRelationship(videoObject)
+        
+        print("request : \(request)")
+        do {
+            let fetchResult = try context.fetch(request)
+            print("fetchResult : \(fetchResult)")
+            if fetchResult.count == 0 {
+                print("editUserInfoCoreData : false")
+                return false
+            } else {
+                try context.save()
+                print("editUserInfoCoreData : true")
+                return true
+            }
+        } catch {
+            print(error.localizedDescription)
+            return false
+        }
+    }
 }

@@ -20,6 +20,24 @@ extension UserInfo {
     @NSManaged public var id: String?
     @NSManaged public var name: String?
     @NSManaged public var pw: String?
+    @NSManaged public var relationship: NSSet?
+
+}
+
+// MARK: Generated accessors for relationship
+extension UserInfo {
+
+    @objc(addRelationshipObject:)
+    @NSManaged public func addToRelationship(_ value: Videos)
+
+    @objc(removeRelationshipObject:)
+    @NSManaged public func removeFromRelationship(_ value: Videos)
+
+    @objc(addRelationship:)
+    @NSManaged public func addToRelationship(_ values: NSSet)
+
+    @objc(removeRelationship:)
+    @NSManaged public func removeFromRelationship(_ values: NSSet)
 
 }
 

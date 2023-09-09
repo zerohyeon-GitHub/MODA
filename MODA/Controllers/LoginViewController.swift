@@ -206,14 +206,33 @@ class LoginViewController: UIViewController {
             }
             // 메인 화면으로 이동.
             print("Main 화면으로 넘어가기")
-            let vc = MainViewController()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
             
+            createMainView()
         } else { // 일치하지 않은 경우
             SignUpViewController().alertMessage(title: "로그인", message: "ID와 PASSWORD를 확인해주세요.")
             print("PW가 맞지 않음.")
         }
+    }
+    
+    func createMainView() {
+        // 두 개의 뷰 컨트롤러 생성
+        let mainViewController = MainViewController()
+        let myPageViewController = MyPageViewController()
+        
+        // "메인" 탭 바 아이콘 설정
+        let mainIcon = UIImage(systemName: "play.rectangle")
+        mainViewController.tabBarItem = UITabBarItem(title: "메인", image: mainIcon, tag: 0)
+        
+        // "마이페이지" 탭 바 아이콘 설정
+        let myPageIcon = UIImage(systemName: "person.crop.rectangle")
+        myPageViewController.tabBarItem = UITabBarItem(title: "마이페이지", image: myPageIcon, tag: 1)
+        
+        // 탭 바 컨트롤러 생성
+        let tabBarController = CustomTabBarController()
+        tabBarController.viewControllers = [mainViewController, myPageViewController]
+        
+        tabBarController.modalPresentationStyle = .fullScreen
+        present(tabBarController, animated: true)
     }
     
     private lazy var signUpButton: UIButton = {

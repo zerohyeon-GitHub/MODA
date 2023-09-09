@@ -9,5 +9,12 @@
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="pw" optional="YES" attributeType="String"/>
+        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Videos"/>
+    </entity>
+    <entity name="Videos" representedClassName="Videos" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="thumbnailImageName" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="viewcount" optional="YES" attributeType="String"/>
     </entity>
 </model>

@@ -20,6 +20,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
         
