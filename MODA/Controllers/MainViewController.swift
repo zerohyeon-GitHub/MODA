@@ -119,7 +119,6 @@ extension MainViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        // 해당 셀에 데이터 설정
         let video = videos[indexPath.item]
         cell.configure(with: video)
         

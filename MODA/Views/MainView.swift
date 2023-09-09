@@ -11,20 +11,27 @@ class MainView: UIView {
     
     let mainButton: UIButton = {
         let bt = UIButton(type: .custom)
-        bt.backgroundColor = .black
-        bt.tintColor = .white
-        bt.layer.cornerRadius = 8
-        bt.clipsToBounds = true
-        bt.setTitle("MODA", for: .normal)
-        bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        let imageView = UIImageView(image: UIImage(named: "120"))
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            
+            bt.addSubview(imageView)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                imageView.topAnchor.constraint(equalTo: bt.topAnchor),
+                imageView.bottomAnchor.constraint(equalTo: bt.bottomAnchor),
+                imageView.leadingAnchor.constraint(equalTo: bt.leadingAnchor),
+                imageView.trailingAnchor.constraint(equalTo: bt.trailingAnchor)
+            ])
         return bt
     }()
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumInteritemSpacing = 4 // 가로 간격
-        layout.minimumLineSpacing = 4 // 세로 간격
+        layout.minimumInteritemSpacing = 4
+        layout.minimumLineSpacing = 4
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .systemGray5
         return collectionView
