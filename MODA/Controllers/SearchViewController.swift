@@ -76,6 +76,15 @@ extension SearchViewController: UICollectionViewDelegate {
             }
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedVideo = videos[indexPath.item]
+        
+        let detailVC = DetailViewController()
+        detailVC.video = selectedVideo
+        
+        present(detailVC, animated: true, completion: nil)
+    }
 }
 
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
