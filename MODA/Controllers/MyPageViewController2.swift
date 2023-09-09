@@ -157,15 +157,6 @@ class MyPageViewController2: UIViewController {
                         }
                     }
                 }
-
-            } else {
-                logout()
-                // 화면2가 아닌 경우
-                // 새로운 화면1을 띄움
-                let LoginViewController = LoginViewController()
-                LoginViewController.modalPresentationStyle = .fullScreen
-                present(LoginViewController, animated: true, completion: nil)
-
             }
         } else {
             // 현재의 화면이 MyPageViewController에 속하지 않는 경우

@@ -35,7 +35,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBarController.viewControllers = [mainViewController, myPageViewController]
         
         // 윈도우 루트 뷰 컨트롤러 설정
-        window.rootViewController = tabBarController
+        let coreData = LoginStatus.fetchRequest()
+        if CoreDataManager.shared.countCoreData(request: coreData) == 0 { // 없는 경우 로그인 화면 이동
+            print("core data가 없는 경우")
+            window.rootViewController = LoginViewController()
+        } else {
+            print("아무일 없이 실행~")
+            window.rootViewController = tabBarController
+        }
         
         // 윈도우를 표시
         self.window = window
