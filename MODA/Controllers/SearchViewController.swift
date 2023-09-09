@@ -11,6 +11,7 @@ class SearchViewController: UIViewController {
     var query: String?
     var videos: [Video] = []
     let apiManager = YoutubeAPIManager()
+    var isLoadingMoreVideos: Bool = false
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -52,12 +53,34 @@ class SearchViewController: UIViewController {
 }
 
 extension SearchViewController: UICollectionViewDelegate {
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if !isLoadingMoreVideos && offsetY > contentHeight - scrollView.frame.height * 1.5 {
+            isLoadingMoreVideos = true
+            loadMoreVideos()
+        }
+    }
+
+    func loadMoreVideos() {
+        if let query = query {
+            apiManager.fetchMoreSearchVideos(query: query) { [weak self] newVideos in
+                DispatchQueue.main.async {
+                    let existingVideoIDs = Set(self?.videos.map { $0.id } ?? [])
+                    let uniqueNewVideos = newVideos.filter { !existingVideoIDs.contains($0.id) }
+                    self?.videos.append(contentsOf: uniqueNewVideos)
+                    self?.collectionView.reloadData()
+                    self?.isLoadingMoreVideos = false
+                }
+            }
+        }
+    }
 }
 
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth = collectionView.bounds.width / 2 - 4 // 2칸으로 나누고 간격을 뺌
+        let itemWidth = collectionView.bounds.width / 2 - 4
         let itemHeight = itemWidth
         
         return CGSize(width: itemWidth, height: itemHeight)

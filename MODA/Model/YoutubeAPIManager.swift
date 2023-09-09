@@ -65,6 +65,7 @@ struct SearchAPIResponse: Codable {
 class YoutubeAPIManager {
     let apiKey = "AIzaSyASzD9pPFFt4gxv20U2dXlwWvTVgLLzRek"
     var nextPageToken: String?
+    var searchNextPageToken: String?
     
     func fetchPopularVideos(completion: @escaping ([Video]) -> Void) {
         var urlComponents = URLComponents(string: "https://www.googleapis.com/youtube/v3/videos")!
@@ -139,6 +140,48 @@ extension YoutubeAPIManager {
         
         task.resume()
     }
+    
+    func fetchMoreSearchVideos(query: String, completion: @escaping ([Video]) -> Void) {
+            var urlComponents = URLComponents(string: "https://www.googleapis.com/youtube/v3/search")!
+            
+            var queryItems = [
+                URLQueryItem(name: "part", value: "snippet"),
+                URLQueryItem(name: "q", value: query),
+                URLQueryItem(name: "maxResults", value: "20"),
+                URLQueryItem(name: "key", value: apiKey),
+                URLQueryItem(name: "type", value: "video")
+            ]
+            
+            if let nextPageToken = self.searchNextPageToken {
+                queryItems.append(URLQueryItem(name: "pageToken", value: nextPageToken))
+            }
+            
+            urlComponents.queryItems = queryItems
+            let request = URLRequest(url: urlComponents.url!)
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {
+                    completion([])
+                    return
+                }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let response = try decoder.decode(SearchAPIResponse.self, from: data)
+                    
+                    self.searchNextPageToken = response.nextPageToken
+                    
+                    let videos = response.items.map { Video(id: $0.id.videoId, thumbnailImageName: $0.snippet.thumbnails.default.url, title: $0.snippet.title, viewCount: nil) }
+                    completion(videos)
+                    
+                } catch {
+                    print(error)
+                    completion([])
+                }
+            }
+            
+            task.resume()
+        }
 }
 
 
