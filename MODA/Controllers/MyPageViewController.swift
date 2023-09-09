@@ -140,11 +140,8 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
             // MyPageViewController2에 데이터 전달
             let secondViewController = MyPageViewController2()
             secondViewController.userInfo = item // 데이터를 전달
-            
-            // 새로운 뷰 컨트롤러를 모달로 표시
-            present(secondViewController, animated: true, completion: nil)
-        }
-        
+        let secondViewController = MyPageViewController2()
+        present(secondViewController, animated: true, completion: nil)
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             videos.count
         }

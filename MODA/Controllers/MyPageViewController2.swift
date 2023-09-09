@@ -28,8 +28,6 @@ class MyPageViewController2: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        
-        
         // MyPageViewController의 buttonTapped에서 가져온 데이터를 텍스트 필드에 표시
         if let userInfo = userInfo {
             nameTextField.text = userInfo.name
@@ -205,13 +203,10 @@ class MyPageViewController2: UIViewController {
             
         }
     }
-
     
     // LoginStatus에 있는 coreData를 삭제.
     func logout(){
         let coreData = LoginStatus.fetchRequest()
         CoreDataManager.shared.deleteAllCoreData(request: coreData)
     }
-
-
 }
