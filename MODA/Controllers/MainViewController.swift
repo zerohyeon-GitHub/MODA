@@ -20,8 +20,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
         
@@ -70,11 +68,13 @@ class MainViewController: UIViewController {
     @objc func openSearchViewController() {
         if mainView.searchView.isHidden {
             mainView.searchView.isHidden = false
+            mainView.clearSearchButton.isHidden = false
             UIView.animate(withDuration: 0.3) {
                 self.mainView.layoutIfNeeded()
             }
         } else {
             mainView.searchView.isHidden = true
+            mainView.clearSearchButton.isHidden = false
             UIView.animate(withDuration: 0.3) {
                 self.mainView.layoutIfNeeded()
             }
@@ -83,7 +83,7 @@ class MainViewController: UIViewController {
     
     @objc func closeSearch() {
         mainView.searchView.isHidden = true
-        mainView.clearSearchButton.isHidden = true
+//        mainView.clearSearchButton.isHidden = true
         mainView.searchTextField.text = ""
         mainView.searchTextField.resignFirstResponder()
     }
