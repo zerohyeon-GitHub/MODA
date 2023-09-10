@@ -83,7 +83,7 @@ class MainViewController: UIViewController {
     
     @objc func closeSearch() {
         mainView.searchView.isHidden = true
-        mainView.clearSearchButton.isHidden = true
+//        mainView.clearSearchButton.isHidden = true
         mainView.searchTextField.text = ""
         mainView.searchTextField.resignFirstResponder()
     }
