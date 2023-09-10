@@ -228,6 +228,7 @@ class SignUpViewController: UIViewController {
             let data = UsersInfo(name: nameTextField.text ?? "", id: idTextField.text ?? "", pw: pwTextField.text ?? "", email: emailTextField.text ?? "")
             CoreDataManager.shared.insertCoreData(userInfo: data)
         }
+        dismiss(animated: true)
     }
     
     private lazy var fetchButton: UIButton = {
@@ -312,7 +313,8 @@ class SignUpViewController: UIViewController {
     private func configure() {
         view.backgroundColor = UIColor.white
         
-        [titleLabel, inputStackView, signUpButton, fetchButton, deleteButton, oneDeleteButton].forEach {
+//        [titleLabel, inputStackView, signUpButton, fetchButton, deleteButton, oneDeleteButton].forEach {
+        [titleLabel, inputStackView, signUpButton].forEach {
             view.addSubview($0)
         }
     }
@@ -322,9 +324,9 @@ class SignUpViewController: UIViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         inputStackView.translatesAutoresizingMaskIntoConstraints = false
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
-        fetchButton.translatesAutoresizingMaskIntoConstraints = false
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        oneDeleteButton.translatesAutoresizingMaskIntoConstraints = false
+//        fetchButton.translatesAutoresizingMaskIntoConstraints = false
+//        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+//        oneDeleteButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -335,17 +337,17 @@ class SignUpViewController: UIViewController {
             inputStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             inputStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            fetchButton.topAnchor.constraint(equalTo: inputStackView.bottomAnchor, constant: 20),
-            fetchButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            fetchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            
-            deleteButton.topAnchor.constraint(equalTo: fetchButton.bottomAnchor, constant: 10),
-            deleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            deleteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            
-            oneDeleteButton.topAnchor.constraint(equalTo: deleteButton.bottomAnchor, constant: 10),
-            oneDeleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            oneDeleteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+//            fetchButton.topAnchor.constraint(equalTo: inputStackView.bottomAnchor, constant: 20),
+//            fetchButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+//            fetchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+//
+//            deleteButton.topAnchor.constraint(equalTo: fetchButton.bottomAnchor, constant: 10),
+//            deleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+//            deleteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+//
+//            oneDeleteButton.topAnchor.constraint(equalTo: deleteButton.bottomAnchor, constant: 10),
+//            oneDeleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+//            oneDeleteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
             signUpButton.heightAnchor.constraint(equalToConstant: 30),
             signUpButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
