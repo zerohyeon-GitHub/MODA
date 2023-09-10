@@ -140,28 +140,29 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
             // MyPageViewController2에 데이터 전달
             let secondViewController = MyPageViewController2()
             secondViewController.userInfo = item // 데이터를 전달
-        let secondViewController = MyPageViewController2()
-        present(secondViewController, animated: true, completion: nil)
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            videos.count
-        }
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! LikelistCell
+//            let secondViewController = MyPageViewController2()
+            present(secondViewController, animated: true, completion: nil)
+            func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+                videos.count
+            }
             
-            let video = videos[indexPath.row]
-            
-            // 썸네일 이미지 설정
-            cell.thumbnailImageView.image = UIImage(named: "youtube")
-            
-            // 제목 설정
-            cell.titleLabel.text = video.title
-            
-            // ID 설정
-            cell.idLabel.text = "ID: \(String(video.id))"
-            
-            return cell
-            
+            func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! LikelistCell
+                
+                let video = videos[indexPath.row]
+                
+                // 썸네일 이미지 설정
+                cell.thumbnailImageView.image = UIImage(named: "youtube")
+                
+                // 제목 설정
+                cell.titleLabel.text = video.title
+                
+                // ID 설정
+                cell.idLabel.text = "ID: \(String(video.id))"
+                
+                return cell
+                
+            }
         }
     }
 }
