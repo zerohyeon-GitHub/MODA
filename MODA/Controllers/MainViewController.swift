@@ -25,6 +25,8 @@ class MainViewController: UIViewController {
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
         
+        mainView.mainButton.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
+        
         // API 관리자를 사용하여 인기 동영상 가져오기
         apiManager.fetchPopularVideos { [weak self] videos in
             DispatchQueue.main.async {
@@ -41,6 +43,11 @@ class MainViewController: UIViewController {
         mainView.clearSearchButton.addTarget(self, action: #selector(closeSearch), for: .touchUpInside)
         
         mainView.searchTextField.delegate = self
+    }
+    
+    @objc func scrollToTop() {
+        let topIndexPath = IndexPath(row: 0, section: 0)
+        mainView.collectionView.scrollToItem(at: topIndexPath, at: .top, animated: true)
     }
     
     @objc func refreshVideos() {
@@ -121,7 +128,6 @@ extension MainViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        // 해당 셀에 데이터 설정
         let video = videos[indexPath.item]
         cell.configure(with: video)
         
