@@ -12,11 +12,13 @@ class MyPageViewController: UIViewController, UITableViewDataSource, UITableView
     // 테이블 뷰
     let tableView = UITableView()
     
+    
     var videos: [Video] = [] // 비디오 배열
     
     var selectedVideo: Video? // 선택된 비디오 정보
+    var selectedThumbnailImage: UIImage?
     
-    let thumbnailImageView = UIImageView() // 썸네일 이미지를 표시할 뷰
+    var thumbnailImageView = UIImageView() 
     
     override func viewDidLoad() {
         super.viewDidLoad()

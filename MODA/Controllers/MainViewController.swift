@@ -23,7 +23,6 @@ class MainViewController: UIViewController {
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
         
-        // API 관리자를 사용하여 인기 동영상 가져오기
         apiManager.fetchPopularVideos { [weak self] videos in
             DispatchQueue.main.async {
                 self?.videos = videos
@@ -45,7 +44,7 @@ class MainViewController: UIViewController {
                 if uniqueNewVideos.count > 0 {
                     self?.videos = uniqueNewVideos
                 }
-
+                
                 print("새로고침 완료, 새로운 영상 개수: \(uniqueNewVideos.count)")
                 self?.mainView.collectionView.reloadData()
                 self?.mainView.collectionView.refreshControl?.endRefreshing()
@@ -87,7 +86,7 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return videos.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCell", for: indexPath) as? VideoCell else {
             return UICollectionViewCell()
@@ -105,17 +104,18 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemWidth = collectionView.bounds.width / 2 - 4 // 2칸으로 나누고 간격을 뺌
         let itemHeight = itemWidth
-
+        
         return CGSize(width: itemWidth, height: itemHeight)
     }
 }
 extension MainViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedVideo = videos[indexPath.item]
-
+        
         let detailVC = DetailViewController()
         detailVC.video = selectedVideo
         
         present(detailVC, animated: true, completion: nil)
+        print("\(detailVC) 눌렀따!")
     }
 }

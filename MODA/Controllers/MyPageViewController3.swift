@@ -14,7 +14,6 @@ class MyPageViewController3: UIViewController {
     let idLabel = UILabel()
     let emailLabel = UILabel()
     
-    // 텍스트 필드를 클래스 레벨 변수로 선언
         let nameTextField = UITextField()
         let idTextField = UITextField()
         let emailTextField = UITextField()
