@@ -135,6 +135,8 @@ class MyPageViewController2: UIViewController {
     // "LOGOUT" 버튼이 눌렸을 때 호출되는 메서드
     @objc func logoutButtonTapped() {
         print("LOGOUT 버튼이 눌렸습니다.")
+        // 로그인 정보 삭제.
+        logout()
         
         // 현재의 화면이 MyPageViewController에 속한 경우
         if let myPageViewController = presentingViewController as? MyPageViewController {
